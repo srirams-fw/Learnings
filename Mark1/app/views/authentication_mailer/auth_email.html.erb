@@ -29,9 +29,9 @@
     <h2> <%= t(:auth_email_welcome) %> </h2>
     <label> <%= t(:auth_email_desc) %> </label>
     <div class="button-container">
-        <a href="http://localhost:3000/authorize?key=123xyz">
+        <%= link_to "http://localhost:3000/authorize/#{@hash}" do %>
             <button> <%= t(:auth_email_btn) %> </button>
-        </a>
+        <%end%>
     </div>
     <label> <%= t(:auth_email_ignore) %> </label>
     <label> 
