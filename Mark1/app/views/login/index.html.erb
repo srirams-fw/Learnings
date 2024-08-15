@@ -1,0 +1,51 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<div class="login-form">
+<span class="logo"></span>
+<% if @mailSent != true %>
+    <h2 class="poppins-bold font40 signin-fw"><%= t(:signin_to_fw) %></h2>
+    <label class="poppins-regular signin-desc font17"><%= t(:signin_des) %></label>
+    <%= form_with url: authenticate_path, id: 'login_form', method: :get, local: true do |form|%>
+        <div class="login-container">
+            <div class="form-group">
+                <%= form.email_field :email, class: 'form-control', required: true, placeholder: t(:email_placeholder) %>
+            </div>
+            <%= @empty %> 
+            <% if @empty %>
+                    <label><%= t('invalid_email')%></label>
+            <% end %>
+            <div class="form-group">
+                <%= submit_tag t(:signin_with_email), id: 'form_submit', class: 'form-submit poppins-bold font17' %>
+            </div>
+        </div>
+    <% end %>
+<% elsif @mailSent == true %>
+    <h2 class="poppins-bold font40 signin-fw"><%= t(:check_email) %></h2>
+    <label class="poppins-regular signin-desc font17">
+        <%= t(:we_have_emailed) %>
+        <label class="poppins-bold"><%= @email+". " %></label>
+        <%= t(:click_to_sign) %>
+    </label>
+    <span class="mailImg"></span>
+    <label class="poppins-regular font17"><%= t(:check_spam) %></label>
+    <div class="form-group">
+        <button class="form-submit poppins-bold font17" id="resend_mail"><%= @mailSent != true  ? '00:00' : t(:resend_email) %></button>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const resend = document.querySelector('#resend_mail');
+            resend.addEventListener('click', e => {
+                console.log('resend')
+                <%= "fetch(`/resend_mail?email="+@email+"\`)" %>
+                .then(response => response.json())
+                .then(data => {
+                    resultContainer.textContent = JSON.stringify(data, null, 2);
+                })
+                .catch(error => console.error('Error fetching data:', error));
+            })    
+        });
+    </script>
+<% end %>
+</div>
+

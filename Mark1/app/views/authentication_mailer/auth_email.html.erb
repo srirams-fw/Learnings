@@ -1,0 +1,42 @@
+<head>
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+        }
+        button {
+            background-color: #30b6f8;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        label {
+            display: block;
+            padding: 10px;
+        }
+
+        .button-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <h2> <%= t(:auth_email_welcome) %> </h2>
+    <label> <%= t(:auth_email_desc) %> </label>
+    <div class="button-container">
+        <a href="http://localhost:3000/authorize?key=123xyz">
+            <button> <%= t(:auth_email_btn) %> </button>
+        </a>
+    </div>
+    <label> <%= t(:auth_email_ignore) %> </label>
+    <label> 
+        <%= t(:best_regards) %> 
+        <br/>
+        <%= t(:freshims) %>
+    </label>
+</body>
