@@ -2,7 +2,7 @@ require 'digest'
 
 class LoginController < ApplicationController
     def root
-        if session[:current_user_id].length > 0
+        if session[:current_user_id] != nil
             redirect_to '/dashboard'
         else
             redirect_to '/login'
@@ -16,7 +16,7 @@ class LoginController < ApplicationController
     def sendAuthMail(_email)
         session[:temp_mail_id] = _email
         _temp = Digest::MD5.hexdigest _email
-        #AuthenticationMailer.auth_email(_email,_temp).deliver_now
+        AuthenticationMailer.auth_email(_email,_temp).deliver_now
     end
 
     def authenticate
