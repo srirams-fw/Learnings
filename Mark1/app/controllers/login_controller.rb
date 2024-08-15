@@ -10,7 +10,11 @@ class LoginController < ApplicationController
     end
 
     def loadLogin
-        render :action => :index
+        if session[:current_user_id] != nil
+            redirect_to '/dashboard'
+        else
+            render :action => :index
+        end
     end
 
     def sendAuthMail(_email)
@@ -20,17 +24,20 @@ class LoginController < ApplicationController
     end
 
     def authenticate
-       @email = params[:email]
-       if @email.length <=0  
-            @empty= true
-            redirect_to '/login'
-       else
-            @mailSent = true
-            sendAuthMail(@email)
-            render :action => :index
-            #send mail
-       end
-        
+        if session[:current_user_id] != nil
+            redirect_to '/dashboard'
+        else
+            @email = params[:email]
+            if @email.length <=0  
+                    @empty= true
+                    redirect_to '/login'
+            else
+                    @mailSent = true
+                    sendAuthMail(@email)
+                    render :action => :index
+                    #send mail
+            end
+        end
     end
 
     def resend_mail
