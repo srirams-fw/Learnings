@@ -1,14 +1,28 @@
 class ApplicationController < ActionController::Base
+    before_action :check_user, except: [:root, :loadLogin, :sendAuthMail, :authenticate, :resend_mail, :authorize]
+
+    def check_user
+        if session[:current_user_id] == nil
+            set_defaults
+            redirect_to '/'
+        end
+    end
+
     def setLang(_selectedLang)
         case _selectedLang
-            when "val1"
+            when "en-US"
                 _lang= :en
-            when "val2"
+            when "fr-fr"
                 _lang= :fr
             else
                 _lang= :en
         end
         I18n.locale = _lang
+        #redirect_to request.referrer
     end
-    #redirect_to request.referrer
+    
+    def set_defaults
+        setLang('en-US')
+        #reset_session
+    end
 end

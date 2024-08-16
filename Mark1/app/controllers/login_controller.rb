@@ -20,7 +20,7 @@ class LoginController < ApplicationController
     def sendAuthMail(_email)
         session[:temp_mail_id] = _email
         _temp = Digest::MD5.hexdigest _email
-        #AuthenticationMailer.auth_email(_email,_temp).deliver_now
+        AuthenticationMailer.auth_email(_email,_temp).deliver_now
     end
 
     def authenticate
