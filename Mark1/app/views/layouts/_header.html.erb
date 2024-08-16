@@ -1,0 +1,26 @@
+<div class="header">
+    <%= link_to root_path do%>
+        <span class="header-logo"></span>
+    <%end%>
+
+    <ul class="nav-bar poppins-regular">
+        <li class="nav-links"><%= link_to t(:dashboard), dashboard_path %></li>
+        <li class="nav-links"><%= link_to t(:my_tickets), dashboard_path %></li>
+        <li class="nav-links">
+            <%= link_to dashboard_path do%>
+                <button class="create-ticket" id="create"><%= t(:create_ticket) %></button>
+            <%end%>
+        </li>
+    </ul>
+    <ul class="nav-bar poppins-regular align-end">
+        <li class="nav-links">
+            <%= text_field_tag :search, nil, class: 'search-ticket', placeholder: t(:search) %>
+        </li>
+        <li class="nav-links">
+            <%= select_tag :lang, options_for_select([[t(:en_us), 'en-us'], [t(:fr_fr), 'fr-fr']]), id: 'language-select',class: 'poppins-regular' %>
+        </li>
+        <li class="nav-links">
+            <%= label_tag nil, "#{t(:welcome)} #{session[:current_user_id].to_s[0...8]}...", title: session[:current_user_id], class: "pointer" %> 
+        </li>
+    </ul>
+</div>
