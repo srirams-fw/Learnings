@@ -16,6 +16,9 @@
         <%= render :partial => "layouts/header" %>
       <% end %>
       <%= yield %>
+      <% if session[:current_user_id] != nil %>
+        <%= render :partial => "layouts/footer" %>
+      <% end %>
     </div>
   </body>
 </html>
