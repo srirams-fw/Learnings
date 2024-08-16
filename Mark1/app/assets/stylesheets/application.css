@@ -160,12 +160,24 @@ ul.nav-bar li {
   font-weight: 300;
 }
 
-.nav-links select, .nav-links select *{
+.nav-links select, .nav-links select * {
   border: none;
   cursor: pointer;
   font-family: "Poppins", sans-serif;
 }
 
-.align-end{
+.align-end {
   margin-left: auto !important;
+}
+
+.user-account {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background-size: contain !important;
+  margin: auto;
+}
+
+.user-container img, .user-container .pointer {
+  vertical-align: middle; 
 }

@@ -19,7 +19,8 @@
         <li class="nav-links">
             <%= select_tag :lang, options_for_select([[t(:en_us), 'en-us'], [t(:fr_fr), 'fr-fr']]), id: 'language-select',class: 'poppins-regular' %>
         </li>
-        <li class="nav-links">
+        <li class="nav-links user-container">
+            <%= image_tag 'user.png', alt: 'Example Image',class: 'user-account' %>
             <%= label_tag nil, "#{t(:welcome)} #{session[:current_user_id].to_s[0...8]}...", title: session[:current_user_id], class: "pointer" %> 
         </li>
     </ul>
