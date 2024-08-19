@@ -1,0 +1,137 @@
+
+<%= form_with(model: ticket, local: true,class: "view-form") do |form| %>
+    <p id="notice"><%= notice %></p>
+
+    <h2 class="poppins-bold heading"><%= headingLabel %> </h2>
+    <div class='view-container'>
+        <div class='main-container'>
+            <div class="field">
+                <%= form.label :product, class:'product-label' %>
+                <%= @ticket.product %>
+            </div>
+  
+            <div class="field">
+                <h2 class="ticket-summary poppins-bold" id="ticket_header"><%= @ticket.summary %></h1>
+                <%= form.text_field :summary,class: 'ticket-edit hide' %> 
+            </div>
+            
+            <div class="field">
+                <%= form.label :description %>
+                <%= form.text_area :description %>
+            </div>
+            
+            
+            
+            <div class="field">
+                <%= form.label :attachments %>
+                <%= form.text_field :attachments %>
+            </div>
+            
+            <div class="field">
+                <%= form.label :comments %>
+                <%= form.text_area :comments %>
+            </div>
+            
+            <div class="actions">
+                <%= form.submit %>
+            </div>
+        </div>
+
+        <div class='right-panel'>
+            <div class="field status-panel">
+                <%= form.label :status, value:@ticket.status, id:"status_label" %>
+                <%= form.select :status, options_for_select(@status_options), {}, class: 'poppins-regular hide' %>
+            </div>
+
+            <div class="details-view">
+                <div class="details-header poppins-bold">
+                    <%=t(:details) %>
+                </div>
+
+                <div class="field">
+                    <%= form.label :ticket_type %>
+                    <%= form.select :ticket_type, options_for_select(@ticket_type_options), id: 'ticket_type',class: 'poppins-regular' %>
+                </div>
+                
+                <div class="field">
+                    <%= form.label :reporter %>
+                    <%= form.text_field :reporter, readonly: true, value: session[:current_user_id],disabled: true %>
+                
+                </div>
+
+                <div class="field">
+                    <%= form.label :parent_ticket_id %>
+                    <%= form.number_field :parent_ticket_id %>
+                </div>
+                
+                <div class="field">
+                    <%= form.label :environment_found %>
+                    <%= form.select :environment_found, options_for_select(@environment_found_options), id: 'environment_found',class: 'poppins-regular' %>
+                </div>
+
+                <div class="field">
+                    <%= form.label :priority %>
+                    
+                    <%= form.select :priority, options_for_select(@priority_options), id: 'priority',class: 'poppins-regular' %>
+                </div>
+                    
+                <div class="field">
+                    <%= form.label :severity %>
+                    <%= form.select :severity, options_for_select(@severity_options), id: 'severity',class: 'poppins-regular' %>
+                </div>
+                
+                <div class="field">
+                    <%= form.label :start_date %>
+                    <%= form.date_select :start_date %>
+                </div>
+                
+                <div class="field">
+                    <%= form.label :due_date %>
+                    <%= form.date_select :due_date %>
+                </div>
+                
+                <div class="field">
+                    <%= form.label :assignee %>
+                    <%= form.text_field :assignee %>
+                </div>
+                
+                <div class="field">
+                    <%= form.label :labels %>
+                    <%= form.text_field :labels %>
+                </div>
+                
+                <div class="field">
+                    <%= form.label :fix_version %>
+                    <%= form.text_field :fix_version %>
+                </div>
+
+            </div>
+        </div>
+    </div>
+  <% end %>
+  
+  <script>
+    const toggleView = (src,target) => {
+        src.addEventListener('click', e => {
+            src.classList.toggle('hide')
+            target.classList.toggle('hide')
+            target.focus()
+        })
+        target.addEventListener('blur', e => {
+            src.innerText = target.value
+            src.classList.toggle('hide')
+            target.classList.toggle('hide')
+        })
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+
+        const summary = document.querySelector('#ticket_summary');
+        const header = document.querySelector('#ticket_header');
+
+        const statusLabel = document.querySelector('#status_label');
+        const statusSelect = document.querySelector('#ticket_status');
+
+        toggleView(header,summary)
+        toggleView(statusLabel,statusSelect)
+    });
+  </script>

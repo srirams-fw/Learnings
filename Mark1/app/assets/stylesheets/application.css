@@ -33,8 +33,12 @@ body.dark-mode {
   background-color: #121212;
   color: white;
 }
-.bold{
+.bold {
   font-weight: bold;
+}
+
+.hide {
+  display: none !important;
 }
 
 .pointer{
@@ -99,6 +103,7 @@ body.dark-mode {
   justify-content: space-between;
   border: 1px solid #ccc;
   position: fixed;
+  top:0;
   width: 100%;
   background-color: inherit;
   height: 78px;

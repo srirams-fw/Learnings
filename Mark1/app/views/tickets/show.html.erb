@@ -1,0 +1,6 @@
+<div class="ticket-container poppins-regular">
+    <%= render 'view', ticket: @ticket, headingLabel: '' %>
+
+    <%= link_to 'Edit', edit_ticket_path(@ticket) %> |
+    <%= link_to 'Back', tickets_path %>
+</div>

@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product: MyString
+  ticket_type: 
+  summary: 
+  reporter: 
+  status: 
+  parent_ticket_id: 1
+  environment_found: MyString
+  description: MyText
+  priority: 
+  severity: 
+  start_date: 2024-08-16
+  due_date: 2024-08-16
+  assignee: 
+  labels: MyString
+  fix_version: MyString
+  attachments: MyString
+  comments: MyText
+
+two:
+  product: MyString
+  ticket_type: 
+  summary: 
+  reporter: 
+  status: 
+  parent_ticket_id: 1
+  environment_found: MyString
+  description: MyText
+  priority: 
+  severity: 
+  start_date: 2024-08-16
+  due_date: 2024-08-16
+  assignee: 
+  labels: MyString
+  fix_version: MyString
+  attachments: MyString
+  comments: MyText

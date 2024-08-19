@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tickets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Ticket Type</th>
+      <th>Summary</th>
+      <th>Reporter</th>
+      <th>Status</th>
+      <th>Parent ticket</th>
+      <th>Environment found</th>
+      <th>Description</th>
+      <th>Priority</th>
+      <th>Severity</th>
+      <th>Start date</th>
+      <th>Due date</th>
+      <th>Assignee</th>
+      <th>Labels</th>
+      <th>Fix version</th>
+      <th>Attachments</th>
+      <th>Comments</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tickets.each do |ticket| %>
+      <tr>
+        <td><%= ticket.product %></td>
+        <td><%= ticket.ticket_type %></td>
+        <td><%= ticket.summary %></td>
+        <td><%= ticket.reporter %></td>
+        <td><%= ticket.status %></td>
+        <td><%= ticket.parent_ticket_id %></td>
+        <td><%= ticket.environment_found %></td>
+        <td><%= ticket.description %></td>
+        <td><%= ticket.priority %></td>
+        <td><%= ticket.severity %></td>
+        <td><%= ticket.start_date %></td>
+        <td><%= ticket.due_date %></td>
+        <td><%= ticket.assignee %></td>
+        <td><%= ticket.labels %></td>
+        <td><%= ticket.fix_version %></td>
+        <td><%= ticket.attachments %></td>
+        <td><%= ticket.comments %></td>
+        <td><%= link_to 'Show', ticket %></td>
+        <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
+        <td><%= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ticket', new_ticket_path %>
