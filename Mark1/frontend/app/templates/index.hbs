@@ -1,0 +1,22 @@
+<div class="index-container">
+    <h2>Incident Management Overview</h2>
+    <HighCharts
+    @chartOptions={{this.chartOptions}}
+    @content={{this.chartData}}
+    />
+
+    <div class="chart-container">
+        <div class="half-width">
+            <HighCharts
+            @content={{this.chartData1}}
+            @chartOptions={{this.chartOptions1}}
+            />
+        </div>
+        <div class="half-width">
+            <HighCharts
+            @series={{this.chartData2}}
+            @chartOptions={{this.chartOptions2}}
+            />
+        </div>
+    </div>
+</div>
