@@ -21,7 +21,7 @@
         </li>
         <li class="nav-links user-container">
             <%= image_tag 'user.png', alt: 'Example Image',class: 'user-account' %>
-            <%= label_tag nil, "#{t(:welcome)} #{session[:current_user_id].to_s[0...8]}...", title: session[:current_user_id], class: "pointer" %> 
+            <%= label_tag nil, "#{t(:welcome)} #{truncate_text(session[:current_user_id])}", title: session[:current_user_id], class: "pointer" %> 
         </li>
     </ul>
 </div>
