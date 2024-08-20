@@ -30,13 +30,8 @@
     background-color: #F5F5F5 ;
   }
 
-.ticket-form {
-    width: 50vw;
-    border: 2px solid #ccc;
-    border-radius: 7px;
-}
 .ticket-form,.main-container,.right-panel {
-    padding: 20px;
+    padding: 0 20px;
     margin: 0 auto;
 
     .heading {
@@ -77,6 +72,13 @@
     input[type=text], input[type=number] {
         min-width: 250px;
     }
+}
+
+.ticket-form {
+    padding: 20px;
+    width: 50vw;
+    border: 2px solid #ccc;
+    border-radius: 7px;
 }
 
 .view-form {
