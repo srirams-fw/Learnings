@@ -1,0 +1,51 @@
+<div id="<%=containerID+'_container'%>" class="editor-container">
+    <div class="toolbar">
+        <button data-command="bold"><b>B</b></button>
+        <button data-command="italic"><i>I</i></button>
+        <button data-command="underline"><u>U</u></button>
+        <button data-command="strikeThrough"><strike>S</strike></button>
+        <button data-command="justifyLeft">Left</button>
+        <button data-command="justifyCenter">Center</button>
+        <button data-command="justifyRight">Right</button>
+        <button data-command="insertUnorderedList">• List</button>
+        <button data-command="insertOrderedList">1. List</button>
+        <button data-command="createLink" data-prompt="Enter the URL">Link</button>
+        <button data-command="unlink">Unlink</button>
+        <button data-command="foreColor" data-prompt="Enter the hex color code">Text Color</button>
+        <button data-command="hiliteColor" data-prompt="Enter the hex color code">Highlight</button>
+        <button data-command="insertImage" data-prompt="Enter the image URL">Image</button>
+        <button data-command="undo">Undo</button>
+        <button data-command="redo">Redo</button>
+    </div>
+
+    <div id="<%=containerID%>" class="editor" contenteditable="true">
+    
+    </div>
+    <%= form.hidden_field form_attr %>
+</div>
+
+<script>
+    // Function to execute the command
+    function execCmd(command, value = null) {
+        document.execCommand(command, false, value);
+    }
+
+    // Add event listeners to all toolbar buttons
+    document.querySelectorAll('#<%=containerID+'_container'%> .toolbar button').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e?.preventDefault()
+            const command = this.getAttribute('data-command');
+            const promptValue = this.getAttribute('data-prompt') ? prompt(this.getAttribute('data-prompt')) : null;
+            execCmd(command, promptValue);
+        });
+    });
+
+    document.querySelector('#new_ticket_form').addEventListener('submit', function(e) {
+        e.preventDefault()
+        const editor = document.querySelector('#<%=containerID%>');
+        const hiddenElement = document.querySelector('#<%=containerID%> + input[type=hidden]') 
+        hiddenElement.value = editor.innerHTML;
+        console.log('>>test submit',editor,hiddenElement)
+        this.submit()
+  });
+</script>

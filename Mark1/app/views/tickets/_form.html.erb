@@ -1,5 +1,5 @@
 
-<%= form_with(model: ticket, local: true,class: "ticket-form") do |form| %>
+<%= form_with(model: ticket, local: true,id: "new_ticket_form", class: "ticket-form") do |form| %>
   <h2 class="poppins-bold heading"><%= headingLabel %> </h2>
   <% if ticket.errors.any? %>
     <div id="error_explanation">
@@ -14,22 +14,22 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :product %>
+    <%= form.label t(:product)%>
     <%= form.select :product, options_for_select(@product_options), {}, {id: 'product',class: 'poppins-regular'} %>
   </div>
 
   <div class="field">
-    <%= form.label :ticket_type %>
+    <%= form.label t(:ticket_type), class:"mandatory"  %>
     <%= form.select :ticket_type, options_for_select(@ticket_type_options), id: 'ticket_type',class: 'poppins-regular' %>
   </div>
 
   <div class="field">
-    <%= form.label :summary %>
-    <%= form.text_field :summary,class: 'ticket-summary' %> 
+    <%= form.label t(:summary), class:"mandatory"  %>
+    <%= form.text_field :summary,class: 'ticket-summary',required: true %> 
   </div>
 
   <div class="field">
-    <%= form.label :reporter %>
+    <%= form.label t(:reporter) %>
     <%= form.text_field :reporter_ui, readonly: true, value: session[:current_user_id],disabled: true %>
     <%= form.hidden_field :reporter, value: session[:current_user_id] %>
 
@@ -37,72 +37,71 @@
   </div>
 
   <div class="field">
-    <%= form.label :status %>
+    <%= form.label t(:status), class:"mandatory"  %>
     <%= form.select :status, options_for_select(@status_options), id: 'status',class: 'poppins-regular' %>
   </div>
 
   <div class="field">
-    <%= form.label :parent_ticket_id %>
+    <%= form.label t(:parent_ticket) %>
     <%= form.number_field :parent_ticket_id %>
   </div>
 
   <div class="field">
-    <%= form.label :environment_found %>
+    <%= form.label t(:environment_found) %>
     <%= form.select :environment_found, options_for_select(@environment_found_options), id: 'environment_found',class: 'poppins-regular' %>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.label t(:description) %>
+    <%= render 'rte', ticket: @ticket, form: form, form_attr: :description, containerID: 'descripitonEditor' %>
   </div>
 
   <div class="field">
-    <%= form.label :priority %>
-    
+    <%= form.label t(:priority), class:"mandatory"  %>
     <%= form.select :priority, options_for_select(@priority_options), id: 'priority',class: 'poppins-regular' %>
   </div>
     
   <div class="field">
-    <%= form.label :severity %>
+    <%= form.label t(:severity), class:"mandatory"  %>
     <%= form.select :severity, options_for_select(@severity_options), id: 'severity',class: 'poppins-regular' %>
   </div>
 
   <div class="field">
-    <%= form.label :start_date %>
-    <%= form.date_select :start_date %>
+    <%= form.label t(:start_date) %>
+    <%= form.date_field :start_date %>
   </div>
 
   <div class="field">
-    <%= form.label :due_date %>
-    <%= form.date_select :due_date %>
+    <%= form.label t(:due_date) %>
+    <%= form.date_field :due_date %>
   </div>
 
   <div class="field">
-    <%= form.label :assignee %>
-    <%= form.text_field :assignee %>
+    <%= form.label t(:assignee), class:"mandatory"  %>
+    <%= form.text_field :assignee, value: session[:current_user_id],required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :labels %>
+    <%= form.label t(:labels) %>
     <%= form.text_field :labels %>
   </div>
 
   <div class="field">
-    <%= form.label :fix_version %>
+    <%= form.label t(:fix_version) %>
     <%= form.text_field :fix_version %>
   </div>
 
   <div class="field">
-    <%= form.label :attachments %>
+    <%= form.label t(:attachments) %>
     <%= form.text_field :attachments %>
   </div>
 
   <div class="field">
-    <%= form.label :comments %>
-    <%= form.text_area :comments %>
+    <%= form.label t(:comments) %>
+    <%= render 'rte', ticket: @ticket, form: form, form_attr: :comments, containerID: 'commentsEditor' %>    
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit t(:create_ticket), class: "create-ticket" %>
   </div>
 <% end %>

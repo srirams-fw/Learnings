@@ -45,6 +45,10 @@ body.dark-mode {
   cursor: pointer;
 }
 
+.mandatory::after{
+  content: " *";
+  color: red;
+}
 .poppins-regular,.poppins-bold,.poppins-black,.poppins-regular-italic,.poppins-bold-italic,.poppins-black-italic {
   font-family: "Poppins", sans-serif;
 }
