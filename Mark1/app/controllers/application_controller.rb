@@ -29,4 +29,11 @@ class ApplicationController < ActionController::Base
         @selectedLang = I18n.locale
         #reset_session
     end
+
+    def logout
+        reset_session
+        flash[:notice] = "Logged out successfully."
+        redirect_to root_path
+      end
+      
 end

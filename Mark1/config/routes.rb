@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   get '/resend_mail', to: 'login#resend_mail'
   get '/authorize/:key', to: 'login#authorize'
   post '/set_language', to: 'application#set_lang'
+  delete '/logout', to: 'application#logout'
 end

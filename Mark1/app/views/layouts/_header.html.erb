@@ -19,9 +19,18 @@
         <li class="nav-links">
             <%= select_tag :lang, options_for_select([[t(:en), 'en'], [t(:fr), 'fr']],@selectedLang), id: 'language-select',class: 'poppins-regular' %>
         </li>
-        <li class="nav-links user-container">
-            <%= image_tag 'user.png', alt: 'Example Image',class: 'user-account' %>
-            <%= label_tag nil, "#{t(:welcome)} #{truncate_text(session[:current_user_id])}", title: session[:current_user_id], class: "pointer" %> 
+        <li class="nav-links user-container pointer">
+            <div class="user-panel">
+                <%= image_tag 'user.png', alt: 'Example Image',class: 'user-account' %>
+                <%= label_tag nil, "#{t(:welcome)} #{truncate_text(session[:current_user_id])}", title: session[:current_user_id] %> 
+                <div class="user-dropdown">
+                    <div class="user-logout">
+                        <%= link_to logout_path, method: :delete do %>
+                            <i class="fa fa-sign-out"></i><%= label_tag t(:logout) %>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
         </li>
     </ul>
 </div>

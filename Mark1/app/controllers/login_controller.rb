@@ -55,6 +55,15 @@ class LoginController < ApplicationController
         _tempkey = Digest::MD5.hexdigest session[:temp_mail_id]
         if @key == _tempkey
             session[:current_user_id] = session[:temp_mail_id]
+
+            user = User.find_or_create_by(email: session[:current_user_id]) do |u|
+                u.password = _tempkey
+            end
+              
+            user.update(password: _tempkey) unless user.password == _tempkey
+        
+            session[:user_id] = user.id
+
             redirect_to '/dashboard'
         end
     end
