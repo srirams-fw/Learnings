@@ -7,7 +7,7 @@
 
 .myTicket-container {
     padding: 35px;
-    min-height: 80vh 
+    min-height: 80vh;
 }
 
 .myTicket-table {
@@ -40,7 +40,7 @@
     }
 
     .field {
-        margin: 10px 0;
+       
         label {
             display: block;
             font-weight: 400;
@@ -83,6 +83,7 @@
 
 .view-form {
     padding-left: 35px;
+    min-height: 80vh;
 
     .field .product-label {
         font-size: 13px;
@@ -93,11 +94,11 @@
         }       
     }
     .ticket-summary,.ticket-edit {
-        margin: 10px 0;
+        margin-bottom: 10px;
     }
     .ticket-edit {
         font-size: 1.2em;
-        width: 80%;
+        width: 100%;
         outline: 1px solid #ccc;
     }
 
@@ -105,13 +106,44 @@
         display: flex;
         width:100%;
 
+        .editable {
+            cursor: pointer;
+            .fa {
+                display: none;
+                font-size: inherit;
+                margin-left: 5px; ;
+            }
+
+            &:hover {
+                .fa {
+                    display: unset;
+                }
+            }
+        }
+
         .main-container {
-            flex-grow: 1;
+            width:70%;
             margin-right: 5px;
+
+            .desc-label {
+                margin-top: 30px;
+            }
+
+            .view-description{
+                min-height: 30vh;
+            }
         }
         .right-panel {
-            flex-grow: 1;
-            display: grid;
+            width:30%;
+
+            .options-table {
+                width: 90%;
+                margin: 15px auto;
+
+                td {
+                    padding: 5px;
+                }
+            }
 
             .details-view {
                 border: 2px solid #eee;
@@ -132,7 +164,9 @@
             }
 
             .status-panel {
-                margin: 0;
+                margin: 10px 0;
+                display: flex;
+                justify-content: space-between;
                 label,select{
                     min-width: 100px;
                 }

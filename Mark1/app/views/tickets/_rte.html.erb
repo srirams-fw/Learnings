@@ -1,27 +1,32 @@
-<div id="<%=containerID+'_container'%>" class="editor-container">
-    <div class="toolbar">
-        <button data-command="bold"><i class="fa fa-bold"></i></button>
-        <button data-command="italic"><i class="fa fa-italic"></i></button>
-        <button data-command="underline"><i class="fa fa-underline"></i></button>
-        <button data-command="strikeThrough"><i class="fa fa-strikethrough"></i></button>
-        <button data-command="justifyLeft"><i class="fa fa-align-left"></i></button>
-        <button data-command="justifyCenter"><i class="fa fa-align-center"></i></button>
-        <button data-command="justifyRight"><i class="fa fa-align-right"></i></button>
-        <button data-command="insertUnorderedList"><i class="fa fa-list-ul"></i></button>
-        <button data-command="insertOrderedList"><i class="fa fa-list-ol"></i></button>
-        <button data-command="createLink" data-prompt="Enter the URL"><i class="fa fa-link"></i></button>
-        <button data-command="unlink"><i class="fa fa-unlink"></i></button>
-        <button data-command="foreColor" data-prompt="Enter the hex color code"><i class="fa fa-paint-brush"></i></button>
-        <button data-command="hiliteColor" data-prompt="Enter the hex color code"><i class="fa fa-adjust"></i></button>
-        <button data-command="insertImage" data-prompt="Enter the image URL"><i class="fa fa-image"></i></button>
-        <button data-command="undo"><i class="fa fa-undo"></i></button>
-        <button data-command="redo"><i class="fa fa-repeat"></i></button>
-    </div>
+<% style_class ||= '' %>
+<% content ||= '' %>
+<div id="<%=containerID+'_panel'%>" class="<%= style_class %>">
+    <div id="<%=containerID+'_container'%>" class="editor-container">
+        <div class="toolbar">
+            <button data-command="bold"><i class="fa fa-bold"></i></button>
+            <button data-command="italic"><i class="fa fa-italic"></i></button>
+            <button data-command="underline"><i class="fa fa-underline"></i></button>
+            <button data-command="strikeThrough"><i class="fa fa-strikethrough"></i></button>
+            <button data-command="justifyLeft"><i class="fa fa-align-left"></i></button>
+            <button data-command="justifyCenter"><i class="fa fa-align-center"></i></button>
+            <button data-command="justifyRight"><i class="fa fa-align-right"></i></button>
+            <button data-command="insertUnorderedList"><i class="fa fa-list-ul"></i></button>
+            <button data-command="insertOrderedList"><i class="fa fa-list-ol"></i></button>
+            <button data-command="createLink" data-prompt="Enter the URL"><i class="fa fa-link"></i></button>
+            <button data-command="unlink"><i class="fa fa-unlink"></i></button>
+            <button data-command="foreColor" data-prompt="Enter the hex color code"><i class="fa fa-paint-brush"></i></button>
+            <button data-command="hiliteColor" data-prompt="Enter the hex color code"><i class="fa fa-adjust"></i></button>
+            <button data-command="insertImage" data-prompt="Enter the image URL"><i class="fa fa-image"></i></button>
+            <button data-command="undo"><i class="fa fa-undo"></i></button>
+            <button data-command="redo"><i class="fa fa-repeat"></i></button>
+        </div>
 
-    <div id="<%=containerID%>" class="editor" contenteditable="true">
-    
+        <div id="<%=containerID%>" class="editor" contenteditable="true">
+            <%= sanitize_content(content) %>
+        </div>
+        <%= form.hidden_field form_attr, value: content %>
     </div>
-    <%= form.hidden_field form_attr %>
+    <%= yield %>
 </div>
 
 <script>
@@ -40,12 +45,11 @@
         });
     });
 
-    document.querySelector('#new_ticket_form').addEventListener('submit', function(e) {
+    document.querySelector('#<%=form.options[:id]%>').addEventListener('submit', function(e) {
         e.preventDefault()
         const editor = document.querySelector('#<%=containerID%>');
         const hiddenElement = document.querySelector('#<%=containerID%> + input[type=hidden]') 
-        hiddenElement.value = editor.innerHTML;
-        console.log('>>test submit',editor,hiddenElement)
+        hiddenElement.value = sanitizeHTML(editor.innerHTML);
         this.submit()
   });
 </script>

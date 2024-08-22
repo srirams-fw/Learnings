@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   get '/authenticate', to: 'login#authenticate'
   get '/resend_mail', to: 'login#resend_mail'
   get '/authorize/:key', to: 'login#authorize'
+  post '/set_language', to: 'application#set_lang'
 end

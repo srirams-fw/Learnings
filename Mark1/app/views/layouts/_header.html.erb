@@ -17,7 +17,7 @@
             <%= text_field_tag :search, nil, class: 'search-ticket', placeholder: t(:search) %>
         </li>
         <li class="nav-links">
-            <%= select_tag :lang, options_for_select([[t(:en_us), 'en-us'], [t(:fr_fr), 'fr-fr']]), id: 'language-select',class: 'poppins-regular' %>
+            <%= select_tag :lang, options_for_select([[t(:en), 'en'], [t(:fr), 'fr']],@selectedLang), id: 'language-select',class: 'poppins-regular' %>
         </li>
         <li class="nav-links user-container">
             <%= image_tag 'user.png', alt: 'Example Image',class: 'user-account' %>
