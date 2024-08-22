@@ -1,157 +1,157 @@
 <div class="ticket-container poppins-regular">
-<%= form_with(model: ticket, local: true, class: "view-form", id: "view_ticket_form") do |form| %>
-    <p id="notice"><%= notice %></p>
+    <%= form_with(model: ticket, local: true, class: "view-form", id: "view_ticket_form") do |form| %>
+        <p id="notice"><%= notice %></p>
 
-    <h2 class="poppins-bold heading"><%= headingLabel %> </h2>
-    <div class='view-container'>
-        <div class='main-container'>
-            <div class="field">
-                <%= form.label t(:product), class:'product-label' %>
-                <%= @ticket.product %>
-            </div>
-  
-            <div class="field">
-                <h2 class="ticket-summary poppins-bold editable" id="ticket_header">
-                    <span data-area="content"><%= @ticket.summary %></span>
-                    <i class="fa fa-edit"></i>
-                </h2>                
-                <%= form.text_field :summary,class: 'ticket-edit hide' %> 
-            </div>
-            
-            <div class="field">
-                <%= form.label str_concat(t(:description)), class:'poppins-bold desc-label' %>
-                <div class="view-description editable" id="view_description">
-                    <span data-area="content"><%= sanitize_content(@ticket.description) %></span>
-                    <i class="fa fa-edit"></i>
+        <h2 class="poppins-bold heading"><%= headingLabel %> </h2>
+        <div class='view-container'>
+            <div class='main-container'>
+                <div class="field">
+                    <%= form.label t(:product), class:'product-label' %>
+                    <%= @ticket.product %>
                 </div>
-                <%= render 'rte', ticket: @ticket, form: form, form_attr: :description, containerID: 'descripitonEditor', style_class: 'view-description hide', content: @ticket.description do %>
-                    <%= form.button t(:ok), type: 'button', onclick: 'updateDescription()', class: 'create-ticket' %>
-                <% end %>
+    
+                <div class="field">
+                    <h2 class="ticket-summary poppins-bold editable" id="ticket_header">
+                        <span data-area="content"><%= @ticket.summary %></span>
+                        <i class="fa fa-edit"></i>
+                    </h2>                
+                    <%= form.text_field :summary,class: 'ticket-edit hide' %> 
+                </div>
+                
+                <div class="field">
+                    <%= form.label str_concat(t(:description)), class:'poppins-bold desc-label' %>
+                    <div class="view-description editable" id="view_description">
+                        <span data-area="content"><%= sanitize_content(@ticket.description) %></span>
+                        <i class="fa fa-edit"></i>
+                    </div>
+                    <%= render 'rte', ticket: @ticket, form: form, form_attr: :description, containerID: 'descripitonEditor', style_class: 'view-description hide', content: @ticket.description do %>
+                        <%= form.button t(:ok), type: 'button', onclick: 'updateDescription()', class: 'create-ticket' %>
+                    <% end %>
+                </div>
+                
+                
+                
+                <div class="field">
+                    <%= form.label str_concat(t(:attachments)), class:'poppins-bold'  %>
+                    <%= form.text_field :attachments %>
+                </div>
+                
+                <div class="field">
+                    <%= form.label str_concat(t(:comments)), class:'poppins-bold' %>
+                    <%= form.text_area :comments %>
+                </div>
+                
             </div>
-            
-            
-            
-            <div class="field">
-                <%= form.label str_concat(t(:attachments)), class:'poppins-bold'  %>
-                <%= form.text_field :attachments %>
-            </div>
-            
-            <div class="field">
-                <%= form.label str_concat(t(:comments)), class:'poppins-bold' %>
-                <%= form.text_area :comments %>
-            </div>
-            
-        </div>
 
-        <div class='right-panel'>
-            <div class="field status-panel">
-                <%= form.select :status, options_for_select(@status_options,@ticket.status), {}, class: 'poppins-regular' %>
-                <%= form.submit t(:update_ticket), class: "create-ticket", style:'float:right' %>
-            </div>
-
-            <div class="details-view">
-                <div class="details-header poppins-bold">
-                    <%=t(:details) %>
+            <div class='right-panel'>
+                <div class="field status-panel">
+                    <%= form.select :status, options_for_select(@status_options,@ticket.status), {}, class: 'poppins-regular' %>
+                    <%= form.submit t(:update_ticket), class: "create-ticket", style:'float:right' %>
                 </div>
 
+                <div class="details-view">
+                    <div class="details-header poppins-bold">
+                        <%=t(:details) %>
+                    </div>
 
-                <table class="options-table">
-                    <tbody>
-                        <tr class="field">
-                            <td>
-                                <%= form.label str_concat(t(:ticket_type)), class:"left-grid" %>
-                            </td>
-                            <td>
-                                <%= form.select :ticket_type, options_for_select(@ticket_type_options,@ticket.ticket_type), id: 'ticket_type',class: 'poppins-regular right-grid'  %>
-                            </td>
-                        </tr>
-                        <tr class="field">
-                            <td>
-                                <%= form.label str_concat(t(:reporter)), class:"left-grid" %>
-                            </td>
-                            <td>
-                                <%= form.text_field :reporter, readonly: true,disabled: true, class: 'right-grid' %>
-                            </td>
-                        </tr>
-                        <tr class="field">
-                            <td>
-                                <%= form.label str_concat(t(:parent_ticket)) %>
-                            </td>
-                            <td>
-                                <%= form.number_field :parent_ticket_id %>
-                            </td>
-                        </tr>
-                        <tr class="field">
-                            <td>
-                                <%= form.label str_concat(t(:environment_found)) %>
-                            </td>
-                            <td>
-                                <%= form.select :environment_found, options_for_select(@environment_found_options,@ticket.environment_found), id: 'environment_found',class: 'poppins-regular' %>
-                            </td>
-                        </tr>
-                        <tr class="field">
-                            <td>
-                                <%= form.label str_concat(t(:priority)) %>
-                            </td>
-                            <td>
-                                <%= form.select :priority, options_for_select(@priority_options,@ticket.priority), id: 'priority',class: 'poppins-regular' %>
-                            </td>
-                        </tr>
-                        <tr class="field">
-                            <td>
-                                <%= form.label str_concat(t(:severity)) %>
-                            </td>
-                            <td>
-                                <%= form.select :severity, options_for_select(@severity_options,@ticket.severity), id: 'severity',class: 'poppins-regular' %>
-                            </td>
-                        </tr>
-                        <tr class="field">
-                            <td>
-                                 <%= form.label str_concat(t(:start_date)) %>
-                            </td>
-                            <td>
-                                <%= form.date_field :start_date %>
-                            </td>
-                        </tr>
-                        <tr class="field">
-                            <td>
-                                <%= form.label str_concat(t(:due_date)) %>
-                            </td>
-                            <td>
-                                <%= form.date_field :due_date %>
-                            </td>
-                        </tr>
-                        <tr class="field">
-                            <td>
-                                <%= form.label str_concat(t(:assignee)) %>
-                            </td>
-                            <td>
-                                <%= form.text_field :assignee %>
-                            </td>
-                        </tr>
-                        <tr class="field">
-                            <td>
-                                <%= form.label str_concat(t(:labels)) %>
-                            </td>
-                            <td>
-                                <%= form.text_field :labels %>
-                            </td>
-                        </tr>
-                        <tr class="field">
-                            <td>
-                                <%= form.label str_concat(t(:fix_version)) %>
-                            </td>
-                            <td>
-                                 <%= form.text_field :fix_version %>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
 
+                    <table class="options-table">
+                        <tbody>
+                            <tr class="field">
+                                <td>
+                                    <%= form.label str_concat(t(:ticket_type)), class:"left-grid" %>
+                                </td>
+                                <td>
+                                    <%= form.select :ticket_type, options_for_select(@ticket_type_options,@ticket.ticket_type), id: 'ticket_type',class: 'poppins-regular right-grid'  %>
+                                </td>
+                            </tr>
+                            <tr class="field">
+                                <td>
+                                    <%= form.label str_concat(t(:reporter)), class:"left-grid" %>
+                                </td>
+                                <td>
+                                    <%= form.text_field :reporter, readonly: true,disabled: true, class: 'right-grid' %>
+                                </td>
+                            </tr>
+                            <tr class="field">
+                                <td>
+                                    <%= form.label str_concat(t(:parent_ticket)) %>
+                                </td>
+                                <td>
+                                    <%= form.number_field :parent_ticket_id %>
+                                </td>
+                            </tr>
+                            <tr class="field">
+                                <td>
+                                    <%= form.label str_concat(t(:environment_found)) %>
+                                </td>
+                                <td>
+                                    <%= form.select :environment_found, options_for_select(@environment_found_options,@ticket.environment_found), id: 'environment_found',class: 'poppins-regular' %>
+                                </td>
+                            </tr>
+                            <tr class="field">
+                                <td>
+                                    <%= form.label str_concat(t(:priority)) %>
+                                </td>
+                                <td>
+                                    <%= form.select :priority, options_for_select(@priority_options,@ticket.priority), id: 'priority',class: 'poppins-regular' %>
+                                </td>
+                            </tr>
+                            <tr class="field">
+                                <td>
+                                    <%= form.label str_concat(t(:severity)) %>
+                                </td>
+                                <td>
+                                    <%= form.select :severity, options_for_select(@severity_options,@ticket.severity), id: 'severity',class: 'poppins-regular' %>
+                                </td>
+                            </tr>
+                            <tr class="field">
+                                <td>
+                                    <%= form.label str_concat(t(:start_date)) %>
+                                </td>
+                                <td>
+                                    <%= form.date_field :start_date %>
+                                </td>
+                            </tr>
+                            <tr class="field">
+                                <td>
+                                    <%= form.label str_concat(t(:due_date)) %>
+                                </td>
+                                <td>
+                                    <%= form.date_field :due_date %>
+                                </td>
+                            </tr>
+                            <tr class="field">
+                                <td>
+                                    <%= form.label str_concat(t(:assignee)) %>
+                                </td>
+                                <td>
+                                    <%= form.text_field :assignee %>
+                                </td>
+                            </tr>
+                            <tr class="field">
+                                <td>
+                                    <%= form.label str_concat(t(:labels)) %>
+                                </td>
+                                <td>
+                                    <%= form.text_field :labels %>
+                                </td>
+                            </tr>
+                            <tr class="field">
+                                <td>
+                                    <%= form.label str_concat(t(:fix_version)) %>
+                                </td>
+                                <td>
+                                    <%= form.text_field :fix_version %>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
         </div>
-    </div>
-  <% end %>
+    <% end %>
 </div>
 
 <script>
