@@ -4,7 +4,9 @@ class TicketsController < ApplicationController
 
   # GET /tickets or /tickets.json
   def index
-    @tickets = Ticket.all
+    #@tickets = Ticket.all
+    _email = session[:current_user_id]
+    @tickets = Ticket.where('reporter = ? OR assignee = ?', _email, _email)
   end
 
   # GET /tickets/1 or /tickets/1.json
