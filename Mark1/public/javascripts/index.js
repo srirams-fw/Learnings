@@ -14,8 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
     languageSelect.addEventListener('change', function() {
       var selectedLanguage = this.value;
-  
-      // Send an AJAX request to change the language
+
       fetch('/set_language', {
         method: 'POST',
         headers: {
@@ -24,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         body: JSON.stringify({ locale: selectedLanguage })
       }).then(function() {
-        // Reload the page to apply the language change
         window.location.reload();
       });
     });
