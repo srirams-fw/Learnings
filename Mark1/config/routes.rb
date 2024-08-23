@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   get '/authorize/:key', to: 'login#authorize'
   post '/set_language', to: 'application#set_lang'
   delete '/logout', to: 'application#logout'
+  post '/fetch_tickets', to: 'tickets#fetch_tickets'
 end

@@ -18,9 +18,6 @@ function debounce(func, delay=500) {
   };
 }
 
-
-
-
 var apiCall = (url,method='GET',header={},body={},callback=()=>{}) => {
   fetch(url, {
     method,
@@ -38,8 +35,4 @@ var apiCall = (url,method='GET',header={},body={},callback=()=>{}) => {
   }).then(callback);
 }
 var reload = () => window.location.reload();
-document.addEventListener('DOMContentLoaded', function() {
-    var languageSelect = document.getElementById('language-select');
-    languageSelect.addEventListener('change', function() { apiCall('/set_language','POST',null,{ locale: this.value },reload)});
-  });
   

@@ -13,13 +13,11 @@
         <th><%=t(:status)%></th>
         <th><%=t(:parent_ticket)%></th>
         <th><%=t(:environment_found)%></th>
-        <th><%=t(:description)%></th>
         <th><%=t(:priority)%></th>
         <th><%=t(:severity)%></th>
         <th><%=t(:start_date)%></th>
         <th><%=t(:due_date)%></th>
         <th><%=t(:assignee)%></th>
-        <th><%=t(:comments)%></th>
         <th colspan="2"><%=t(:actions)%></th>
       </tr>
     </thead>
@@ -29,18 +27,16 @@
         <tr>
           <td><%= ticket.product %></td>
           <td><%= ticket.ticket_type %></td>
-          <td><%= truncate_text(ticket.summary,30) %></td>
-          <td><%= truncate_text(ticket.reporter) %></td>
+          <td><%= truncate_text(ticket.summary,60) %></td>
+          <td><%= truncate_text(ticket.reporter,15) %></td>
           <td><%= ticket.status %></td>
           <td><%= ticket.parent_ticket_id %></td>
           <td><%= ticket.environment_found %></td>
-          <td><%= truncate_text(ticket.description,30) %></td>
           <td><%= ticket.priority %></td>
           <td><%= ticket.severity %></td>
           <td><%= ticket.start_date %></td>
           <td><%= ticket.due_date %></td>
-          <td><%= truncate_text(ticket.assignee) %></td>
-          <td><%= truncate_text(ticket.comments,30) %></td>
+          <td><%= truncate_text(ticket.assignee,15) %></td>
           <td class="hide">
             <%= link_to ticket do %>
               <i class="fa fa-eye"></i>
