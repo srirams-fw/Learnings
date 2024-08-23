@@ -126,7 +126,7 @@
                                     <%= form.label str_concat(t(:assignee)) %>
                                 </td>
                                 <td>
-                                    <%= form.text_field :assignee %>
+                                    <%= form.select :assignee, options_for_select(@assignee_options,@ticket.assignee), id: 'assignee',class: 'poppins-regular' %>
                                 </td>
                             </tr>
                             <tr class="field">
