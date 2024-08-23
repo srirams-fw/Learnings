@@ -1,0 +1,74 @@
+<% style_class ||= '' %>
+<% content ||= '' %>
+<% queryLength ||= 3 %>
+<% emptyMessage ||= 'no_tickets' %>
+<% apiUrl ||= '/fetch_tickets'%>
+<div id="<%=containerID+'_panel'%>" class="<%= style_class %>">
+    <div id="<%=containerID+'_container'%>" class="autocomplete-container">
+        <div id="<%=containerID+'_selection'%>" class="autocomplete-selection <%= content == '' ? 'hide' : '' %> fa" onClick="clearSelection()">
+            <%= content %>
+        </div>
+        <div id="<%=containerID+'_input'%>" class="autocomplete <%= content == '' ? '' : 'hide' %>" contenteditable="true">
+        </div>
+        <div id="<%=containerID+'_result'%>" class="autocomplete-result">
+            <ul>
+            </ul>
+        </div>
+        <%= form.hidden_field form_attr %>
+    </div>
+    <%= yield %>
+</div>
+
+<script>
+    var displayResults = ({query,result:data=[]}) => {
+        if(data.length === 0){
+            data.push(["<%=I18n.t(emptyMessage)%>",null])
+        }
+        setOptions(data)
+    } 
+    var handleSelection = (content,value='') => {
+        const selection = document.querySelector('#<%=containerID+'_selection'%>')
+        const input = document.querySelector('#<%=containerID+'_input'%>')
+        const hidden = document.querySelector('#<%=containerID+'_container'%> input[type=hidden]')
+    
+        hidden.value = value
+        selection.innerText = content
+        selection.classList.toggle('hide')
+        input.classList.toggle('hide')
+        setOptions([])
+
+    }
+
+    var clearSelection = () => {
+
+    const selection = document.querySelector('#<%=containerID+'_selection'%>')
+    const input = document.querySelector('#<%=containerID+'_input'%>')
+    const hidden = document.querySelector('#<%=containerID+'_container'%> input[type=hidden]')
+
+    hidden.value = selection.innerText = input.innerText = ''
+    selection.classList.toggle('hide')
+    input.classList.toggle('hide')
+    input.focus()
+
+    }
+    var setOptions = data => {
+        var ul = document.querySelector('#<%=containerID+'_result'%> ul')
+        ul.innerHTML = ''
+        data.forEach(([summary,id]) => {
+            const li = document.createElement('li')
+            li.innerText = id ? `#${id} : ${summary}` : summary
+            id ? (li.addEventListener('click',() => handleSelection(li.innerText,id))) : ''
+            ul.appendChild(li)
+            
+        })
+    }
+    var getResultsFunc = (query) => {
+        if(query.length >= <%= queryLength%>){
+            apiCall('<%= apiUrl %>','POST',null,{ query },(res)=> displayResults(res))
+        }else {
+            setOptions([])
+        }
+    }
+    var getResults = debounce?.(getResultsFunc) || getResultsFunc
+    document.getElementById('<%=containerID+"_input"%>').addEventListener('input', (e) => getResults(e.target.innerText));
+</script>

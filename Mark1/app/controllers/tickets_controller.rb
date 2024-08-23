@@ -21,6 +21,9 @@ class TicketsController < ApplicationController
 
   # GET /tickets/1/edit
   def edit
+    if @ticket.parent_ticket_id && @ticket.parent_ticket_id >0
+        @parent_ticket = Ticket.find(@ticket.parent_ticket_id)
+    end
   end
 
   # POST /tickets or /tickets.json
@@ -83,7 +86,7 @@ class TicketsController < ApplicationController
     end
 
     def get_ticket_list(_query='')
-        return Ticket.where("ticket_type in (?,?,?) AND summary like '#{_query}%'",'Task', 'Epic', 'Story').pluck(:summary, :id)
+        return Ticket.where("ticket_type in (?,?,?) AND summary like '#{_query}%'",'Task', 'Epic', 'Story').order(:id).pluck(:summary, :id)
     end
 
     def set_attribute_values

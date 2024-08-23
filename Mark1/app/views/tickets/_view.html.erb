@@ -30,8 +30,12 @@
                 </div>
                 
                 
-                
-                <div class="field">
+                <div class="field view-parent">
+                    <%= form.label str_concat(t(:parent_ticket)), class:'poppins-bold' %>
+                    <%= render '/shared/autocomplete', ticket: @ticket, form: form, form_attr: :parent_ticket_id, content: (@parent_ticket ? "##{@ticket.parent_ticket_id} : #{@parent_ticket.summary}" : '')   , containerID: 'parentTicketContainer' %>
+                </div>
+
+                <div class="field hide">
                     <%= form.label str_concat(t(:attachments)), class:'poppins-bold'  %>
                     <%= form.text_field :attachments %>
                 </div>
@@ -71,14 +75,6 @@
                                 </td>
                                 <td>
                                     <%= form.text_field :reporter, readonly: true,disabled: true, class: 'right-grid' %>
-                                </td>
-                            </tr>
-                            <tr class="field">
-                                <td>
-                                    <%= form.label str_concat(t(:parent_ticket)) %>
-                                </td>
-                                <td>
-                                    <%= form.number_field :parent_ticket_id %>
                                 </td>
                             </tr>
                             <tr class="field">
@@ -155,11 +151,11 @@
 </div>
 
 <script>
-    const header = document.querySelector('#ticket_header');
-    const summary = document.querySelector('#ticket_summary');
+    var header = document.querySelector('#ticket_header');
+    var summary = document.querySelector('#ticket_summary');
 
-    const viewDescription = document.querySelector('#view_description');
-    const descripitonEditor = document.querySelector('#descripitonEditor');
+    var viewDescription = document.querySelector('#view_description');
+    var descripitonEditor = document.querySelector('#descripitonEditor');
 
     var toggleView = (src,target,innerHTML = false) => {
         let parentContainer = target;

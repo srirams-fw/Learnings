@@ -43,7 +43,7 @@
 
   <div class="field">
     <%= form.label t(:parent_ticket) %>
-    <%= form.number_field :parent_ticket_id %>
+    <%= render '/shared/autocomplete', ticket: @ticket, form: form, form_attr: :parent_ticket_id, containerID: 'parentTicketContainer' %>
   </div>
 
   <div class="field">
@@ -78,7 +78,7 @@
 
   <div class="field">
     <%= form.label t(:assignee), class:"mandatory"  %>
-    <%= form.text_field :assignee, value: session[:current_user_id],required: true %>
+    <%= form.select :assignee, options_for_select(@assignee_options,session[:current_user_id]), id: 'assignee',class: 'poppins-regular' %>
   </div>
 
   <div class="field">
@@ -91,14 +91,14 @@
     <%= form.text_field :fix_version %>
   </div>
 
-  <div class="field">
+  <div class="field hide">
     <%= form.label t(:attachments) %>
     <%= form.text_field :attachments %>
   </div>
 
   <div class="field">
     <%= form.label t(:comments) %>
-    <%= render 'rte', ticket: @ticket, form: form, form_attr: :comments, containerID: 'commentsEditor' %>    
+    <%= render 'rte', ticket: @ticket, form: form, form_attr: :comments, containerID: 'commentsEditor' %>
   </div>
 
   <div class="actions">
