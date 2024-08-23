@@ -8,6 +8,15 @@
 .myTicket-container {
     padding: 35px;
     min-height: 80vh;
+
+    .total-tickets{
+        display: inline-block;
+        margin: 25px 0;
+
+        b {
+            font-weight: 600;
+        }
+    }
 }
 
 .myTicket-table {

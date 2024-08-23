@@ -56,4 +56,8 @@
       <% end %>
     </tbody>
   </table>
+
+
+  <%= label_tag nil, t(:total_tickets, count: @tickets.count).html_safe, class: "total-tickets poppins-regular" %>
+
 </div>
