@@ -1,0 +1,13 @@
+.index-container {
+    margin-top: 80px;
+    padding: 35px;
+}
+
+.chart-container {
+    display: flex;
+    justify-content: space-around;
+}
+.half-width {
+    width: 40vw;
+    margin: 20px;
+}

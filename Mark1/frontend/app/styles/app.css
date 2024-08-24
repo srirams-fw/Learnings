@@ -1,10 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+  @import url('./ember-override.css');
+  @import url('./index.css');
 
 *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    transition: all 0.2s;
+    transition: all 0.3s;
  }
 
 body {
@@ -14,7 +32,7 @@ body {
 
 /* Dark theme */
 body.dark-mode {
-  background-color: #121212;
+  background-color: #2C2C2C;
   color: white;
 }
 .bold {
@@ -25,10 +43,14 @@ body.dark-mode {
   display: none !important;
 }
 
-.pointer{
+.pointer, .pointer *{
   cursor: pointer;
 }
 
+.mandatory::after{
+  content: " *";
+  color: red;
+}
 .poppins-regular,.poppins-bold,.poppins-black,.poppins-regular-italic,.poppins-bold-italic,.poppins-black-italic {
   font-family: "Poppins", sans-serif;
 }
@@ -46,11 +68,11 @@ body.dark-mode {
 }
 
 .poppins-bold {
-  font-weight: 500;
+  font-weight: 500 !important;
 }
 
 .poppins-black {
-  font-weight: 700;
+  font-weight: 700 !important;
 }
 
 .poppins-regular-italic {
@@ -89,8 +111,13 @@ body.dark-mode {
   position: fixed;
   top:0;
   width: 100%;
-  background-color: inherit;
+  background-color: #e3f2fd; /*beige for dark #f9f3e5; soft blue #e3f2fd*/
+  color: #000 ;
   height: 78px;
+}
+
+.dark-mode .header{
+  background-color: #f9f3e5; /*beige for dark #f9f3e5; soft blue #e3f2fd*/
 }
 
 .header-logo {
@@ -144,14 +171,22 @@ ul.nav-bar li {
   padding: 10px;
   border: 0px;
   border-bottom: 2px solid #ccc;
+  background-color: inherit;
   width: 15vw;
   min-width: 200px;
 }
 
 .search-ticket::placeholder {
   font-family: "Poppins", sans-serif;
+  color: inherit;
   font-style: normal;
   font-weight: 300;
+}
+
+.language-select {
+  background-color: inherit;
+  color: inherit;
+  outline: none;
 }
 
 .nav-links select, .nav-links select * {
@@ -176,24 +211,46 @@ ul.nav-bar li {
   vertical-align: middle; 
 }
 
+.user-panel {
+  position: relative;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.user-panel:hover .user-dropdown {
+  height: auto; 
+}
+
+.user-logout{
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+.user-logout .fa{
+  margin: 0 5px;
+}
+
 .footer {
   padding: 15px;
   background-color: #36454f; /*#282C35*/  
   color: #fff;
 }
 
-
-/* Dashboard */
-.index-container {
-    margin-top: 80px;
-    padding: 35px;
+ul.nav-bar li .search-item {
+  display: flex;
+  align-items: baseline;
+  border-bottom: 2px solid #ccc;
 }
 
-.chart-container {
-    display: flex;
-    justify-content: space-around;
-}
-.half-width {
-    width: 40vw;
-    margin: 20px;
+.search-item i {
+  color: #aaa;
 }
