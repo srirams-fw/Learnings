@@ -83,3 +83,4 @@ en:
   logout: "Logout"
   no_tickets: "No Ticket(s) Found"
   total_tickets: "Showing <b>0</b> - <b>%{count}</b> of <b>%{count}</b>"
+  add_comment: "Add a comment..."

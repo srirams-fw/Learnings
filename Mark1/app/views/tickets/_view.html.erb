@@ -5,6 +5,12 @@
         <h2 class="poppins-bold heading"><%= headingLabel %> </h2>
         <div class='view-container'>
             <div class='main-container'>
+                <div class="field tickets-panel">
+                    <%= form.label nil, "#{t(:tickets)}", class:'tickets-label poppins-bold' %>
+                    <i class="fa fa-angle-right"> </i>
+                    <%=  "##{@ticket.id}" %>
+                </div>
+
                 <div class="field">
                     <%= form.label t(:product), class:'product-label' %>
                     <%= @ticket.product %>
@@ -39,10 +45,34 @@
                     <%= form.label str_concat(t(:attachments)), class:'poppins-bold'  %>
                     <%= form.text_field :attachments %>
                 </div>
-                
-                <div class="field">
+
+                <div class="field comments-container">
                     <%= form.label str_concat(t(:comments)), class:'poppins-bold' %>
-                    <%= form.text_area :comments %>
+                    <div class="comments-dummy-panel">
+                        <i class="fa fa-file-text"></i> <button id="dummy_comments" type="button" class="dummy-comments"><%=t(:add_comment)%></button>
+                    </div>
+                    <%= render 'rte', ticket: @ticket, form: form, form_attr: :comments, containerID: 'commentsEditor', style_class: 'hide', content: @ticket.comments do %>
+                        <%= form.button t(:ok), type: 'button', onclick: 'updateComments()', class: 'create-ticket' %>
+                    <% end %>
+                    <div  id="view_comments" class="view-comments">
+                        <table>
+                            <tr>
+                                <td rowspan="2" class="icon-panel">
+                                    <i class="fa fa-user"></i>
+                                </td>
+                                <td>
+                                    <label class="poppins-bold">
+                                        <%= @ticket.reporter%>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span data-area="content"><%= sanitize_content(@ticket.comments) %></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 
             </div>
@@ -157,6 +187,9 @@
     var viewDescription = document.querySelector('#view_description');
     var descripitonEditor = document.querySelector('#descripitonEditor');
 
+    var dummyComments = document.querySelector('#view_comments');
+    var commentsEditor = document.querySelector('#commentsEditor');
+
     var toggleView = (src,target,innerHTML = false) => {
         let parentContainer = target;
         if(innerHTML){
@@ -184,7 +217,7 @@
     }
 
     var updateDescription = (src =viewDescription,target=descripitonEditor ) => {
-        let parentContainer = document.querySelector?.(`#${target.id}_panel`)
+        let parentContainer = document.querySelector(`#${target.id}_panel`)
         if(!parentContainer){
             parentContainer = target
         }
@@ -193,7 +226,9 @@
         src.classList.toggle('hide')
         parentContainer.classList.toggle('hide')
     }
-        
+    var updateComments = () => {
+        updateDescription(dummyComments,commentsEditor)
+    }   
     toggleView(header,summary)
     toggleView(viewDescription,descripitonEditor,true)
     
