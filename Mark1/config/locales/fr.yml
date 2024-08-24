@@ -53,3 +53,6 @@ fr:
   no_tickets: "Aucun Billet(s) trouvé"
   total_tickets: "Affichage de <b>0</b> - <b>%{count}</b> sur <b>%{count}</b>"
   add_comment : "Ajouter un commentaire..."
+  ticket_created: "Le Billet a été créé avec succès."
+  ticket_updated: "Le Billet a été mis à jour avec succès."
+  ticket_destroyed: "Le Billet a été supprimé avec succès."

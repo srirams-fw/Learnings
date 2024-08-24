@@ -21,8 +21,10 @@
         </li>
         <li class="nav-links user-container pointer">
             <div class="user-panel">
-                <%= image_tag 'user.png', alt: 'Example Image',class: 'user-account' %>
-                <%= label_tag nil, "#{t(:welcome)} #{truncate_text(session[:current_user_id])}", title: session[:current_user_id] %> 
+                <label title="<%= session[:current_user_id] %>">
+                    <i class="fa fa-user"></i>
+                    <%= "#{t(:welcome)} #{truncate_email(session[:current_user_id])}" %>
+                </label>
                 <div class="user-dropdown">
                     <div class="user-logout">
                         <%= link_to logout_path, method: :delete do %>

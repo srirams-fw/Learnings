@@ -32,7 +32,7 @@ class TicketsController < ApplicationController
 
     respond_to do |format|
       if @ticket.save
-        format.html { redirect_to ticket_url(@ticket), notice: "Ticket was successfully created." }
+        format.html { redirect_to ticket_url(@ticket), notice: I18n.t('ticket_created') }
         format.json { render :show, status: :created, location: @ticket }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -45,7 +45,7 @@ class TicketsController < ApplicationController
   def update
     respond_to do |format|
       if @ticket.update(ticket_params)
-        format.html { redirect_to ticket_url(@ticket), notice: "Ticket was successfully updated." }
+        format.html { redirect_to ticket_url(@ticket), notice: I18n.t('ticket_updated') }
         format.json { render :show, status: :ok, location: @ticket }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -59,7 +59,7 @@ class TicketsController < ApplicationController
     @ticket.destroy
 
     respond_to do |format|
-      format.html { redirect_to tickets_url, notice: "Ticket was successfully destroyed." }
+      format.html { redirect_to tickets_url, notice: I18n.t('ticket_destroyed') }
       format.json { head :no_content }
     end
   end

@@ -84,3 +84,6 @@ en:
   no_tickets: "No Ticket(s) Found"
   total_tickets: "Showing <b>0</b> - <b>%{count}</b> of <b>%{count}</b>"
   add_comment: "Add a comment..."
+  ticket_created: "Ticket was successfully created."
+  ticket_updated: "Ticket was successfully updated."
+  ticket_destroyed: "Ticket was successfully destroyed."

@@ -28,7 +28,7 @@
           <td><%= ticket.product %></td>
           <td><%= ticket.ticket_type %></td>
           <td><%= truncate_text(ticket.summary,60) %></td>
-          <td><%= truncate_text(ticket.reporter,15) %></td>
+          <td><%= truncate_email(ticket.reporter,15) %></td>
           <td><%= ticket.status %></td>
           <td><%= ticket.parent_ticket_id %></td>
           <td><%= ticket.environment_found %></td>
@@ -36,7 +36,7 @@
           <td><%= ticket.severity %></td>
           <td><%= ticket.start_date %></td>
           <td><%= ticket.due_date %></td>
-          <td><%= truncate_text(ticket.assignee,15) %></td>
+          <td><%= truncate_email(ticket.assignee,15) %></td>
           <td class="hide">
             <%= link_to ticket do %>
               <i class="fa fa-eye"></i>
