@@ -11,6 +11,7 @@ class TicketsController < ApplicationController
 
   # GET /tickets/1 or /tickets/1.json
   def show
+    get_parent_info
   end
 
   # GET /tickets/new
@@ -21,9 +22,7 @@ class TicketsController < ApplicationController
 
   # GET /tickets/1/edit
   def edit
-    if @ticket.parent_ticket_id && @ticket.parent_ticket_id >0
-        @parent_ticket = Ticket.find(@ticket.parent_ticket_id)
-    end
+    get_parent_info
   end
 
   # POST /tickets or /tickets.json
@@ -108,5 +107,11 @@ class TicketsController < ApplicationController
       @priority_options = [['P3', 'P3'], ['P2', 'P2'], ['P1', 'P1']]
       @severity_options = [['Low', 'Low'], ['Medium', 'Medium'], ['High', 'High'], ['Urgent', 'Urgent']]
       @assignee_options = get_assignee_list
+    end
+
+    def get_parent_info
+      if @ticket.parent_ticket_id && @ticket.parent_ticket_id >0
+        @parent_ticket = Ticket.find(@ticket.parent_ticket_id)
+      end
     end
 end
