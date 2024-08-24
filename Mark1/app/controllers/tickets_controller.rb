@@ -5,8 +5,7 @@ class TicketsController < ApplicationController
   # GET /tickets or /tickets.json
   def index
     #@tickets = Ticket.all
-    _email = session[:current_user_id]
-    @tickets = Ticket.where('reporter = ? OR assignee = ?', _email, _email)
+    @tickets = get_user_tickets
   end
 
   # GET /tickets/1 or /tickets/1.json
@@ -63,6 +62,11 @@ class TicketsController < ApplicationController
     end
   end
 
+  def get_dashboard_data
+    data = get_user_tickets
+    render json: { result: data }, status: :ok
+  end
+
   def fetch_tickets
       _query = params[:query]
       _result = get_ticket_list(_query)
@@ -75,7 +79,6 @@ class TicketsController < ApplicationController
     render json: { query:_query,result:_result  }, status: :ok
   end
 
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_ticket
@@ -87,6 +90,10 @@ class TicketsController < ApplicationController
       params.require(:ticket).permit(:product, :ticket_type, :summary, :reporter, :status, :parent_ticket_id, :environment_found, :description, :priority, :severity, :start_date, :due_date, :assignee, :labels, :fix_version, :attachments, :comments)
     end
 
+    def get_user_tickets
+      _email = session[:current_user_id]
+      return Ticket.where('reporter = ? OR assignee = ?', _email, _email)
+    end
     def get_assignee_list
       return User.pluck(:email)
     end

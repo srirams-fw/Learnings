@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   delete '/logout', to: 'application#logout'
   post '/fetch_tickets', to: 'tickets#fetch_tickets'
   post '/search_tickets', to: 'tickets#search_tickets'
+  get '/dashboard_data', to: 'tickets#get_dashboard_data'
 end

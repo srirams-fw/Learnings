@@ -1,7 +1,28 @@
 import Controller from '@ember/controller';
-import { computed } from '@ember/object';
+import { transformDashboardData } from '../helpers';
 
 export default class IndexController extends Controller {
+  constructor() {
+    super()
+   this.chartData = [
+      {
+        name: 'ESM',
+        data: [0, 0, 0],
+      },
+      {
+        name: 'ER',
+        data: [0, 0, 0],
+      },
+      {
+          name: 'MSP',
+          data: [0, 0, 0]
+      }
+    ];
+  }
+    processTicketData({result=[]}) {
+      this.chartData = transformDashboardData(result)
+    }
+
     chartOptions = {
         chart: {
           type: 'bar',
@@ -18,21 +39,6 @@ export default class IndexController extends Controller {
           },
         },
     };
-    
-    chartData = [
-        {
-          name: 'ER',
-          data: [10, 28, 40],
-        },
-        {
-          name: 'ESM',
-          data: [12, 32, 45],
-        },
-        {
-            name: 'MSP',
-            data: [8, 48, 35]
-        }
-    ];
 
     chartOptions1 = {
         chart: {
@@ -75,71 +81,27 @@ export default class IndexController extends Controller {
             {
               name: '< 25 hrs',
               id: '< 25 hrs',
-              data: [
-                ['v11.0', 24.13],
-                ['v8.0', 17.2],
-                ['v9.0', 8.11],
-                ['v10.0', 5.33],
-                ['v6.0', 1.06],
-                ['v7.0', 0.5],
-              ],
+              data: [],
             },
             {
               name: '25 - 50 hrs',
               id: '25 - 50 hrs',
-              data: [
-                ['v40.0', 5],
-                ['v41.0', 4.32],
-                ['v42.0', 3.68],
-                ['v39.0', 2.96],
-                ['v36.0', 2.53],
-                ['v43.0', 1.45],
-                ['v31.0', 1.24],
-                ['v35.0', 0.85],
-                ['v38.0', 0.6],
-                ['v32.0', 0.55],
-                ['v37.0', 0.38],
-                ['v33.0', 0.19],
-                ['v34.0', 0.14],
-                ['v30.0', 0.14],
-              ],
+              data: [],
             },
             {
               name: '50 - 75 hrs',
               id: '50 - 75 hrs',
-              data: [
-                ['v35', 2.76],
-                ['v36', 2.32],
-                ['v37', 2.31],
-                ['v34', 1.27],
-                ['v38', 1.02],
-                ['v31', 0.33],
-                ['v33', 0.22],
-                ['v32', 0.15],
-              ],
+              data: [],
             },
             {
               name: '75 - 100 hrs',
               id: '75 - 100 hrs',
-              data: [
-                ['v8.0', 2.56],
-                ['v7.1', 0.77],
-                ['v5.1', 0.42],
-                ['v5.0', 0.3],
-                ['v6.1', 0.29],
-                ['v7.0', 0.26],
-                ['v6.2', 0.17],
-              ],
+              data: [],
             },
             {
               name: '> 100',
               id: '> 100',
-              data: [
-                ['v12.x', 0.34],
-                ['v28', 0.24],
-                ['v27', 0.17],
-                ['v29', 0.16],
-              ],
+              data: [],
             },
           ],
         },
@@ -180,6 +142,9 @@ export default class IndexController extends Controller {
       ];
 
       chartOptions2 = {
+        title: {
+          text: 'Incident Volume across Products',
+        },
 		pie: {
 			borderColor: 'black',
 			innerSize: '65%',
