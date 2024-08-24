@@ -18,9 +18,54 @@ export default class IndexController extends Controller {
           data: [0, 0, 0]
       }
     ];
+
+    this.chartData1 = [
+      {
+        name: 'Turn Around Time',
+        colorByPoint: true,
+        data: [
+          {
+            name: '< 25 hrs',
+            y: 56.33,
+            drilldown: '< 25 hrs',
+          },
+          {
+            name: '25 - 50 hrs',
+            y: 24.03,
+            drilldown: '25 - 50 hrs',
+          },
+          {
+            name: '50 - 75 hrs',
+            y: 10.38,
+            drilldown: '50 - 75 hrs',
+          },
+          {
+            name: '75 - 100 hrs',
+            y: 4.77,
+            drilldown: '75 - 100 hrs',
+          },
+          {
+            name: '> 100 hrs',
+            y: 0.91,
+            drilldown: '> 100 hrs',
+          }
+        ],
+      },
+    ];
   }
     processTicketData({result=[]}) {
-      this.chartData = transformDashboardData(result)
+       const {data0, data1}= transformDashboardData(result)
+      
+       this.chartData = data0
+
+       if(this.chartData1 && this.chartData1[0]){
+          const data = this.chartData1[0].data
+
+          data.forEach(datum => {
+            datum.y = parseFloat(data1[datum.name])
+          })
+          
+       }
     }
 
     chartOptions = {
@@ -106,40 +151,6 @@ export default class IndexController extends Controller {
           ],
         },
       };
-    
-      chartData1 = [
-        {
-          name: 'Turn Around Time',
-          colorByPoint: true,
-          data: [
-            {
-              name: '< 25 hrs',
-              y: 56.33,
-              drilldown: '< 25 hrs',
-            },
-            {
-              name: '25 - 50 hrs',
-              y: 24.03,
-              drilldown: '25 - 50 hrs',
-            },
-            {
-              name: '50 - 75 hrs',
-              y: 10.38,
-              drilldown: '50 - 75 hrs',
-            },
-            {
-              name: '75 - 100 hrs',
-              y: 4.77,
-              drilldown: '75 - 100 hrs',
-            },
-            {
-              name: '> 100',
-              y: 0.91,
-              drilldown: '> 100',
-            }
-          ],
-        },
-      ];
 
       chartOptions2 = {
         title: {
