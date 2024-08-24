@@ -18,6 +18,7 @@ fr:
   best_regards: "Cordialement,"
   freshims: "FreshIMS"
   dashboard: "Tableau de bord"
+  tickets: "Billets"
   my_tickets: "Mes Billets"
   create_ticket: "Créer Billet"
   update_ticket: "Mettre à jour le Billet"
