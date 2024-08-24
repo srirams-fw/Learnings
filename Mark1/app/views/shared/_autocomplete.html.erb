@@ -1,14 +1,15 @@
 <% style_class ||= '' %>
 <% content ||= '' %>
+<% handleSelection ||= 'handleSelection' %>
 <% queryLength ||= 3 %>
 <% emptyMessage ||= 'no_tickets' %>
-<% apiUrl ||= '/fetch_tickets'%>
+<% apiUrl ||= '/fetch_tickets' %>
 <div id="<%=containerID+'_panel'%>" class="<%= style_class %>">
     <div id="<%=containerID+'_container'%>" class="autocomplete-container">
-        <div id="<%=containerID+'_selection'%>" class="autocomplete-selection <%= content == '' ? 'hide' : '' %> fa" onClick="clearSelection()">
+        <div id="<%=containerID+'_selection'%>" class="autocomplete-selection <%= content == '' ? 'hide' : '' %> fa" onClick="clearSelection_<%=containerID%>()">
             <%= content %>
         </div>
-        <div id="<%=containerID+'_input'%>" class="autocomplete <%= content == '' ? '' : 'hide' %>" contenteditable="true">
+        <div id="<%=containerID+'_input'%>" class="autocomplete <%= content == '' ? '' : 'hide' %>" contenteditable role="textbox">
         </div>
         <div id="<%=containerID+'_result'%>" class="autocomplete-result">
             <ul>
@@ -20,13 +21,13 @@
 </div>
 
 <script>
-    var displayResults = ({query,result:data=[]}) => {
+    var displayResults_<%=containerID%> = ({query,result:data=[]}) => {
         if(data.length === 0){
             data.push(["<%=I18n.t(emptyMessage)%>",null])
         }
-        setOptions(data)
+        setOptions_<%=containerID%>(data)
     } 
-    var handleSelection = (content,value='') => {
+    var handleSelection_<%=containerID%> = (content,value='') => {
         const selection = document.querySelector('#<%=containerID+'_selection'%>')
         const input = document.querySelector('#<%=containerID+'_input'%>')
         const hidden = document.querySelector('#<%=containerID+'_container'%> input[type=hidden]')
@@ -35,40 +36,53 @@
         selection.innerText = content
         selection.classList.toggle('hide')
         input.classList.toggle('hide')
-        setOptions([])
+        setOptions_<%=containerID%>([])
 
     }
-
-    var clearSelection = () => {
-
-    const selection = document.querySelector('#<%=containerID+'_selection'%>')
-    const input = document.querySelector('#<%=containerID+'_input'%>')
-    const hidden = document.querySelector('#<%=containerID+'_container'%> input[type=hidden]')
-
-    hidden.value = selection.innerText = input.innerText = ''
-    selection.classList.toggle('hide')
-    input.classList.toggle('hide')
-    input.focus()
-
+    
+    var viewTicket_<%=containerID%> = (content,value='') => {
+        const selection = document.querySelector('#<%=containerID+'_selection'%>')
+        const input = document.querySelector('#<%=containerID+'_input'%>')
+        const hidden = document.querySelector('#<%=containerID+'_container'%> input[type=hidden]')
+    
+        hidden.value = value
+        input.innerText = ''
+        selection.innerText = content
+        setOptions_<%=containerID%>([])
+        if(value){
+            window.location.href = `/tickets/${value}/edit`;
+        }
     }
-    var setOptions = data => {
+
+    var clearSelection_<%=containerID%> = () => {
+
+        const selection = document.querySelector('#<%=containerID+'_selection'%>')
+        const input = document.querySelector('#<%=containerID+'_input'%>')
+        const hidden = document.querySelector('#<%=containerID+'_container'%> input[type=hidden]')
+
+        hidden.value = selection.innerText = input.innerText = ''
+        selection.classList.toggle('hide')
+        input.classList.toggle('hide')
+        input.focus()
+    }
+    var setOptions_<%=containerID%> = data => {
         var ul = document.querySelector('#<%=containerID+'_result'%> ul')
         ul.innerHTML = ''
         data.forEach(([summary,id]) => {
             const li = document.createElement('li')
             li.innerText = id ? `#${id} : ${summary}` : summary
-            id ? (li.addEventListener('click',() => handleSelection(li.innerText,id))) : ''
+            id ? (li.addEventListener('click',() => <%= "#{handleSelection}_#{containerID}" %>(li.innerText,id))) : ''
             ul.appendChild(li)
             
         })
     }
-    var getResultsFunc = (query) => {
+    var getResultsFunc_<%=containerID%> = (query) => {
         if(query.length >= <%= queryLength%>){
-            apiCall('<%= apiUrl %>','POST',null,{ query },(res)=> displayResults(res))
+            apiCall('<%= apiUrl %>','POST',null,{ query },(res)=> displayResults_<%=containerID%>(res))
         }else {
-            setOptions([])
+            setOptions_<%=containerID%>([])
         }
     }
-    var getResults = debounce?.(getResultsFunc) || getResultsFunc
-    document.getElementById('<%=containerID+"_input"%>').addEventListener('input', (e) => getResults(e.target.innerText));
+    var getResults_<%=containerID%> = debounce?.(getResultsFunc_<%=containerID%>) || getResultsFunc_<%=containerID%>
+    document.getElementById('<%=containerID+"_input"%>').addEventListener('input', (e) => getResults_<%=containerID%>(e.target.innerText));
 </script>

@@ -60,3 +60,12 @@
     border: none;
     font-size: 16px;
 }
+
+.search-autocomplete {
+    position: relative;
+
+    .autocomplete,.autocomplete-selection {
+        margin-bottom: 5px;
+        border-bottom: none;
+    }
+}

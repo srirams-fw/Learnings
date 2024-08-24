@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   post '/set_language', to: 'application#set_lang'
   delete '/logout', to: 'application#logout'
   post '/fetch_tickets', to: 'tickets#fetch_tickets'
+  post '/search_tickets', to: 'tickets#search_tickets'
 end

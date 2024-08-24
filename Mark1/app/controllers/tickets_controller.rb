@@ -70,6 +70,13 @@ class TicketsController < ApplicationController
     render json: { query:_query,result:_result  }, status: :ok
   end
 
+  def search_tickets
+    _query = params[:query]
+      _result = query_ticket_list(_query)
+    render json: { query:_query,result:_result  }, status: :ok
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_ticket
@@ -87,6 +94,10 @@ class TicketsController < ApplicationController
 
     def get_ticket_list(_query='')
         return Ticket.where("ticket_type in (?,?,?) AND summary like '#{_query}%'",'Task', 'Epic', 'Story').order(:id).pluck(:summary, :id)
+    end
+
+    def query_ticket_list(_query='')
+      return Ticket.where("summary like '#{_query}%' OR id like '#{_query}%'").order(:id).pluck(:summary, :id)
     end
 
     def set_attribute_values

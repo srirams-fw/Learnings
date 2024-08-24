@@ -242,3 +242,13 @@ ul.nav-bar li {
   background-color: #36454f; /*#282C35*/  
   color: #fff;
 }
+
+ul.nav-bar li .search-item {
+  display: flex;
+  align-items: baseline;
+  border-bottom: 2px solid #ccc;
+}
+
+.search-item i {
+  color: #aaa;
+}

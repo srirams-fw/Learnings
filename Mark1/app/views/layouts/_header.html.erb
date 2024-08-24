@@ -14,7 +14,12 @@
     </ul>
     <ul class="nav-bar poppins-regular align-end">
         <li class="nav-links">
-            <%= text_field_tag :search, nil, class: 'search-ticket', placeholder: t(:search) %>
+            <div class="search-item">
+                <i class="fa fa-search"></i>
+                <%= form_with(id:'search_ticket_form') do |form|%>
+                    <%= render '/shared/autocomplete',  form: form, form_attr: :search_ticket, containerID: 'searchTicketContainer',apiUrl: '/search_tickets', handleSelection: 'viewTicket', style_class: 'search-autocomplete' do%><% end %>
+                <% end %>
+            </div>
         </li>
         <li class="nav-links">
             <%= select_tag :lang, options_for_select([[t(:en), 'en'], [t(:fr), 'fr']],@selectedLang), id: 'language-select',class: 'poppins-regular language-select' %>
