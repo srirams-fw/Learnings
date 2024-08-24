@@ -38,8 +38,6 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
     var languageSelect = document.getElementById('language-select');
     languageSelect.addEventListener('change', function() { apiCall('/set_language','POST',null,{ locale: this.value },reload)});
-  });
 </script>
