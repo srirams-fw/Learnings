@@ -30,7 +30,7 @@ body {
 
 /* Dark theme */
 body.dark-mode {
-  background-color: #121212;
+  background-color: #2C2C2C;
   color: white;
 }
 .bold {
@@ -109,8 +109,13 @@ body.dark-mode {
   position: fixed;
   top:0;
   width: 100%;
-  background-color: inherit;
+  background-color: #e3f2fd; /*beige for dark #f9f3e5; soft blue #e3f2fd*/
+  color: #000 ;
   height: 78px;
+}
+
+.dark-mode .header{
+  background-color: #f9f3e5; /*beige for dark #f9f3e5; soft blue #e3f2fd*/
 }
 
 .header-logo {
@@ -164,14 +169,22 @@ ul.nav-bar li {
   padding: 10px;
   border: 0px;
   border-bottom: 2px solid #ccc;
+  background-color: inherit;
   width: 15vw;
   min-width: 200px;
 }
 
 .search-ticket::placeholder {
   font-family: "Poppins", sans-serif;
+  color: inherit;
   font-style: normal;
   font-weight: 300;
+}
+
+.language-select {
+  background-color: inherit;
+  color: inherit;
+  outline: none;
 }
 
 .nav-links select, .nav-links select * {
