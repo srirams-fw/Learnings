@@ -55,23 +55,25 @@
                         <%= form.button t(:ok), type: 'button', onclick: 'updateComments()', class: 'create-ticket' %>
                     <% end %>
                     <div  id="view_comments" class="view-comments">
-                        <table>
-                            <tr>
-                                <td rowspan="2" class="icon-panel">
-                                    <i class="fa fa-user"></i>
-                                </td>
-                                <td>
-                                    <label class="poppins-bold">
-                                        <%= @ticket.reporter%>
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span data-area="content"><%= sanitize_content(@ticket.comments) %></span>
-                                </td>
-                            </tr>
-                        </table>
+                        <% if @ticket.comments.present? %>
+                            <table>
+                                <tr>
+                                    <td rowspan="2" class="icon-panel">
+                                        <i class="fa fa-user"></i>
+                                    </td>
+                                    <td>
+                                        <label class="poppins-bold">
+                                            <%= @ticket.reporter %> 
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span data-area="content"><%= sanitize_content(@ticket.comments) %></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        <% end %>
                     </div>
                 </div>
                 

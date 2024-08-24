@@ -17,7 +17,7 @@
             <div class="search-item">
                 <i class="fa fa-search"></i>
                 <%= form_with(id:'search_ticket_form') do |form|%>
-                    <%= render '/shared/autocomplete',  form: form, form_attr: :search_ticket, containerID: 'searchTicketContainer',apiUrl: '/search_tickets', handleSelection: 'viewTicket', style_class: 'search-autocomplete' do%><% end %>
+                    <%= render '/shared/autocomplete',  form: form, form_attr: :search_ticket, containerID: 'searchTicketContainer', apiUrl: '/search_tickets', handleSelection: 'viewTicket', style_class: 'search-autocomplete', queryLength: 1 do%><% end %>
                 <% end %>
             </div>
         </li>
