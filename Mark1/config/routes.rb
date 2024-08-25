@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   post '/search_tickets', to: 'tickets#search_tickets'
   get '/dashboard_data', to: 'tickets#get_dashboard_data'
   get '/get_session', to: 'application#get_session_info'
+  get 'translations/:locale', to: 'translations#show'
 end

@@ -1,7 +1,14 @@
 import Controller from '@ember/controller';
 import { inject as controller } from '@ember/controller';
 import { transformDashboardData } from '../helpers';
-import { CHART_DATA, CHART_DATA1, CHART_DATA2, CHART_OPTIONS, CHART_OPTIONS1, CHART_OPTIONS2 } from '../helpers/constants';
+import {
+  CHART_DATA,
+  CHART_DATA1,
+  CHART_DATA2,
+  CHART_OPTIONS,
+  CHART_OPTIONS1,
+  CHART_OPTIONS2,
+} from '../helpers/constants';
 
 export default class IndexController extends Controller {
   @controller application;
@@ -15,9 +22,9 @@ export default class IndexController extends Controller {
     this.chartOptions2 = CHART_OPTIONS2;
     this.chartData2 = CHART_DATA2;
   }
-  
+
   handleSession(sessionData) {
-    this.application.setData({...sessionData});
+    this.application.setData({ ...sessionData });
   }
 
   processTicketData({ result = [] }) {
@@ -26,7 +33,7 @@ export default class IndexController extends Controller {
 
     if (this.chartData1 && this.chartData1[0]) {
       const data = this.chartData1[0].data;
-      data.forEach(datum => {
+      data.forEach((datum) => {
         datum.y = parseFloat(data1[datum.name]);
       });
     }
