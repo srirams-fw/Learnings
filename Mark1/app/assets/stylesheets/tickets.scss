@@ -268,3 +268,33 @@
 }
 
 
+/*============ rwd ======== */
+//desktop
+@media only screen and (min-width: 768px) {
+   
+    
+}
+
+//mobile
+@media only screen and (max-width: 767px) {
+  .myTicket-table-wrapper {
+    margin-top: 15px;
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch; 
+  }
+
+  .myTicket-table {
+    th, td {
+      white-space: nowrap; 
+      padding: 5px;
+    } 
+  }
+  .myTicket-container {
+    padding: 10px;
+    min-height: 70vh;
+  }
+
+  .ticket-form {
+    width: 90vw;
+  }
+}
