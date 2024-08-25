@@ -23,9 +23,19 @@
             </select>
         </li>
         <li class="nav-links user-container">
-            
-            <img alt="User Image" class="user-account" src="images/user.png">
-            <label title="Welcome" class="pointer">Welcome!</label>
+            <div class="user-panel">
+                <label title="{{@email}}" class="pointer">
+                    <i class="fa fa-user"></i>
+                    Welcome! {{@userName}}
+                </label>
+                <div class="user-dropdown">
+                    <div class="user-logout">
+                        <a href="#" {{on "click" this.handleClick}} class="pointer">
+                            <i class="fa fa-sign-out"></i> <label>Logout</label>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </li>
     </ul>
 </div>

@@ -1,8 +1,6 @@
 {{page-title "Mark1"}}
 
-{{!-- The following component displays Ember's default welcome message. --}}
-<Header/>
-{{!-- Feel free to remove this! --}}
+<Header @userName={{this.userName}} @email={{this.email}} @locale={{this.locale}}/>
 
 {{outlet}}
 <Footer/>
