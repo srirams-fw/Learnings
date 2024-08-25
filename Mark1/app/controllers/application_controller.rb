@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
     before_action :check_user, except: [:root, :loadLogin, :sendAuthMail, :authenticate, :resend_mail, :authorize]
     before_action :set_locale
 
+    include ApplicationHelper
+
     def check_user
         if session[:current_user_id] == nil
             redirect_to '/'
@@ -28,6 +30,10 @@ class ApplicationController < ActionController::Base
         I18n.locale = session[:locale] || I18n.default_locale
         @selectedLang = I18n.locale
         #reset_session
+    end
+
+    def get_session_info
+        render json: { userName: truncate_email(session[:current_user_id]), email: session[:current_user_id], locale: session[:locale] || I18n.default_locale  }, status: :ok
     end
 
     def logout

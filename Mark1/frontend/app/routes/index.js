@@ -5,10 +5,11 @@ export default class IndexRoute extends Route {
   async model() {
     try {
       
-      let response = await apiCall('/dashboard_data');
-      let data = await response.json();
+      let [response,sessionResponse] = await Promise.all([apiCall('/dashboard_data'),apiCall('/get_session')]);
+      let [data,sessionData] = await Promise.all([response.json(),sessionResponse.json()]);
+        
       if(data){
-        return data
+        return {...data,sessionData}
       }
       return {}
     } catch (error) {
@@ -20,5 +21,6 @@ export default class IndexRoute extends Route {
         super.setupController(controller, model);
         controller.set('data', model);
         controller.processTicketData(model)
+        controller.handleSession(model.sessionData)
     }
 }
