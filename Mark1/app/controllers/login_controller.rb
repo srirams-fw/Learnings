@@ -63,8 +63,9 @@ class LoginController < ApplicationController
             user.update(password: _tempkey) unless user.password == _tempkey
         
             session[:user_id] = user.id
+            flash[:notice] = ""
 
-            redirect_to '/dashboard'
+            redirect_to dashboard_path
         end
     end
 
