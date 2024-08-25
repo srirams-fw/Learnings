@@ -70,7 +70,7 @@
         border-radius: 5px;
     }
 
-    select {
+    select, input[type=text], input[type=number]{
         min-width: 250px;
     }
 
@@ -80,10 +80,6 @@
 
     textarea {
         height: 100px;
-    }
-
-    input[type=text], input[type=number] {
-        min-width: 250px;
     }
 }
 
@@ -295,6 +291,24 @@
   }
 
   .ticket-form {
-    width: 90vw;
+    width: 98vw;
+    border: none;
+
+    select,input[type=text], input[type=number] {
+        width: 100%;
+    }
+
+    input.ticket-summary, textarea {
+        width: 100%;
+    }
+    .actions{
+        input[type=submit] {
+            margin-top: 15px;
+            position: fixed;
+            left: 2px;
+            right: 2px;
+            bottom: 0px;
+        }
+    }
   }
 }
