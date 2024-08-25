@@ -7,8 +7,4 @@ export default class ApplicationRoute extends Route {
   async beforeModel() {
     await this.translationLoader.loadTranslations('en'); 
   }
-
-  async changeLanguage(lang) {
-    await this.translationLoader.loadTranslations(lang); 
-  }
 }

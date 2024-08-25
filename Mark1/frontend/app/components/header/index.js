@@ -17,6 +17,7 @@ export default class HeaderIndexComponent extends Component {
   @action
   async handleLanguageChange(event) {
     const newLocale = event.target.value;
+    await apiCall('/set_language','POST',null,{ locale: newLocale })
     await this.translationLoader.loadTranslations(newLocale);
     this.intl.set('locale', newLocale);
   }
