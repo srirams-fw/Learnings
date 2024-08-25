@@ -4,11 +4,11 @@
     </a> 
 
     <ul class="nav-bar poppins-regular">
-        <li class="nav-links"><a href="/dashboard">Dashboard</a></li>
-        <li class="nav-links"><a href="/tickets">My Tickets</a></li>
+        <li class="nav-links"><a href="/dashboard">{{t "dashboard"}}</a></li>
+        <li class="nav-links"><a href="/tickets">{{t "my_tickets"}}</a></li>
         <li class="nav-links">
             <a href="/tickets/new"> 
-                <button class="create-ticket" id="create" type="button">Create Ticket</button>
+                <button class="create-ticket" id="create" type="button">{{t "create_ticket"}}</button>
             </a>
         </li>
     </ul>
@@ -17,16 +17,16 @@
             
         </li>
         <li class="nav-links">
-            <select name="lang" id="language-select" class="poppins-regular language-select">
-                <option value="en-us">English (US)</option>
-                <option value="fr-fr">French</option>
+            <select name="lang" id="language-select" {{on "change" this.handleLanguageChange}} class="poppins-regular language-select">
+                <option value="en">{{t "en"}}</option>
+                <option value="fr">{{t "fr"}}</option>
             </select>
         </li>
         <li class="nav-links user-container">
             <div class="user-panel">
                 <label title="{{@email}}" class="pointer">
                     <i class="fa fa-user"></i>
-                    Welcome! {{@userName}}
+                    {{t "welcome"}} {{@userName}}
                 </label>
                 <div class="user-dropdown">
                     <div class="user-logout">
