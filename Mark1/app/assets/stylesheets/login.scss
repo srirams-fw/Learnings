@@ -89,6 +89,19 @@
     }
 }
 
+.dark-mode {
+    .login-form {
+
+        .logo {
+            background: asset-url("logo_white.png") no-repeat center;
+        }
+
+        .signin-desc {
+            padding: 10px 0;
+        }
+    }
+}
+
 //desktop
 @media only screen and (min-width: 768px) {
     .login-bg{
@@ -126,10 +139,14 @@
     .login-form {
         width: 85vw;
         height: 70vh;
-    }
 
-    .signin-fw {
-        font-size: 30px !important;
+        .signin-fw {
+            font-size: 30px !important;
+            padding-top: 5px;
+        }
+        .login-container {
+            padding-top: 5px;
+        }
     }
     
     .signin-desc {
