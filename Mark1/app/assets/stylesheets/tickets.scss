@@ -176,6 +176,7 @@
             }
 
             .comments-dummy-panel {
+                display: flex;
                 background-color: #D5D5D5;
                 border-radius: 5px;
                 padding: 10px;
@@ -183,6 +184,7 @@
 
                 .fa,.dummy-comments {
                     background-color: #FFF;
+                    color: #444;
                     padding: 5px;
                     border-radius: 5px;
                     margin: 0 auto;
@@ -205,7 +207,7 @@
 
         .right-panel {
             width:30%;
-            background-color: #fff;
+            background-color: inherit;
 
             input, select {
                 cursor: pointer;
@@ -236,6 +238,7 @@
             .details-header {
                 padding: 7px;
                 background-color: #eee;
+                color: #444;
             }
 
             .status-panel {
@@ -247,16 +250,7 @@
                 }
 
                 label {
-                    border: 2px solid #ddd;
-                    width: 150px;
                     padding: 5px;
-                    border-radius: 5px;
-                    background-color: #ddd;
-                    &:before{
-                        content: 'v';
-                        float: right;
-                    }
-
                 }
             }
         }
@@ -264,11 +258,22 @@
 }
 
 
+.dark-mode {
+    .ticket-container {
+        input {
+            &:disabled {
+                color: inherit;
+                opacity: 0.75;
+                cursor: not-allowed;
+            }
+        }
+    }
+}
+
 /*============ rwd ======== */
 //desktop
 @media only screen and (min-width: 768px) {
-   
-    
+
 }
 
 //mobile
@@ -290,7 +295,7 @@
     min-height: 70vh;
   }
 
-  .ticket-form {
+.ticket-form,.view-form {
     width: 98vw;
     border: none;
 
@@ -308,6 +313,61 @@
             left: 2px;
             right: 2px;
             bottom: 0px;
+        }
+    }
+  }
+  .view-form {
+    padding: 0 5px;
+
+    .view-container {
+        flex-direction: column;
+        width: 100%;
+
+        .main-container, .right-panel {
+            width: 100%;
+            margin: 0; 
+            border: none; 
+            padding: 0 3px;
+        }
+        
+        .main-container {
+            margin-bottom: 5px; 
+            border-bottom: 2px solid #ccc;
+            border-radius: 0;
+
+            .tickets-panel {
+                padding: 15px 0; 
+                text-align: center;
+            }
+
+            .view-description, .view-comments, .comments-dummy-panel {
+                min-height: auto;
+            }
+        }
+
+        .right-panel {
+
+            .status-panel {
+                flex-direction: column;
+                align-items: stretch;
+                label, select {
+                width: 100%;
+                margin-bottom: 10px;
+                }
+            
+                .create-ticket {
+                width: 100%;
+                margin-top: 10px;
+                }
+            }
+
+            .options-table {
+                width: 97%;
+                td {
+                    display: block;
+                    width: 100%;
+                    }
+            }
         }
     }
   }

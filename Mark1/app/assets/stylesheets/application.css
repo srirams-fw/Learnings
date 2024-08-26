@@ -252,3 +252,13 @@ ul.nav-bar li .search-item {
 .search-item i {
   color: #aaa;
 }
+
+.mobile-view {
+  display: none !important;
+}
+
+@media only screen and (max-width: 767px) {
+  .mobile-view{
+      display: unset !important;
+  }
+}

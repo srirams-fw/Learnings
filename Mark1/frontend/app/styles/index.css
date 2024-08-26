@@ -4,14 +4,14 @@
     min-height: 88vh;
 }
 
-.chart-container {
+.chart-container1 {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .half-width {
-    width: 40vw;
-    margin: 20px;
+    width: 48vw;
+    margin: 20px 0;
 }
 
 /* Desktop */

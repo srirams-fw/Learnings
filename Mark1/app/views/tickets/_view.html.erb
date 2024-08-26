@@ -80,7 +80,8 @@
             </div>
 
             <div class='right-panel'>
-                <div class="field status-panel">
+                <div class="field status-panel actions">
+                    <%= form.label t(:status), class:"mobile-view"%>
                     <%= form.select :status, options_for_select(@status_options,@ticket.status), {}, class: 'poppins-regular' %>
                     <%= form.submit t(:update_ticket), class: "create-ticket", style:'float:right' %>
                 </div>
