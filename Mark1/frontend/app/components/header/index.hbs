@@ -33,9 +33,12 @@
                         {{t "welcome"}} {{@userName}}
                     </label>
                     <div class="user-dropdown">
+                        <div class="user-logout" {{on "click" this.colorThemeToggle}}>
+                            <i class="fa fa-adjust"></i> <label>{{t "switch_theme"}}</label>
+                        </div>
                         <div class="user-logout">
                             <a href="#" {{on "click" this.handleClick}} class="pointer">
-                                <i class="fa fa-sign-out"></i> <label>Logout</label>
+                                <i class="fa fa-sign-out"></i> <label>{{t "logout"}}</label>
                             </a>
                         </div>
                     </div>

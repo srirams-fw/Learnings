@@ -246,9 +246,9 @@ ul.nav-bar li {
 }
 
 .user-logout{
-  margin-top: 10px;
   padding: 10px;
   background-color: #fff;
+  color: inherit;
   border: 1px solid #ccc;
 }
 .user-logout .fa{
@@ -327,4 +327,9 @@ ul.nav-bar li .search-item {
     width: 90%;
   }
 
+  .user-logout{
+    background-color: inherit;
+    border: none;
+    padding-bottom: 0;
+  }
 }

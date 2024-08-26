@@ -88,3 +88,6 @@ en:
   ticket_updated: "Ticket was successfully updated."
   ticket_destroyed: "Ticket was successfully destroyed."
   dashboard_heading: "Incident Management Overview"
+  light: "Light"
+  dark: "Dark"
+  switch_theme: "Switch Theme"

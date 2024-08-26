@@ -33,4 +33,9 @@ export default class HeaderIndexComponent extends Component {
     const createTicketLink = document.getElementById('create_ticket_link')
     createTicketLink?.click()
   }
+
+  @action
+  colorThemeToggle(event){
+    document.body.classList.toggle('dark-mode')
+  }
 }

@@ -35,6 +35,9 @@
                         <%= "#{t(:welcome)} #{truncate_email(session[:current_user_id])}" %>
                     </label>
                     <div class="user-dropdown">
+                        <div class="user-logout" onClick="colorThemeToggle()">
+                            <i class="fa fa-adjust"></i><%= label_tag t(:switch_theme) %>
+                        </div>
                         <div class="user-logout">
                             <%= link_to logout_path, method: :delete do %>
                                 <i class="fa fa-sign-out"></i><%= label_tag t(:logout) %>
@@ -57,5 +60,8 @@
     function creatTicket(){
        const createTicketLink = document.getElementById('create_ticket_link')
        createTicketLink?.click()
+    }
+    function colorThemeToggle() {
+        document.body.classList.toggle('dark-mode')
     }
 </script>
