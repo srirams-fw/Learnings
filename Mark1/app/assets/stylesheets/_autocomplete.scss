@@ -23,7 +23,6 @@
                 border-bottom: 1px solid #ccc;
             }
             
-
             &:hover {
                 background-color: #eee;
                 border-radius: 5px;
@@ -40,6 +39,7 @@
     width: 150%;
     z-index: 10;
     background-color: #fff;
+    color: #444;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.08);
 }
 
@@ -69,5 +69,36 @@
     .autocomplete,.autocomplete-selection {
         margin-bottom: 5px;
         border-bottom: none;
+    }
+}
+
+/*RWD*/
+@media only screen and (max-width: 767px) {
+    .autocomplete,.autocomplete-selection{
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .autocomplete-result {
+        width: 100%;
+    }
+
+    .autocomplete-container{    
+        ul {
+            li {
+                white-space: nowrap; 
+                overflow: hidden;
+            }
+        }
+    }
+
+    .search-autocomplete {
+        .autocomplete-container{    
+            ul {
+                li {
+                    width: 95%;
+                }
+            }
+        }
     }
 }
