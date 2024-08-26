@@ -87,3 +87,4 @@ en:
   ticket_created: "Ticket was successfully created."
   ticket_updated: "Ticket was successfully updated."
   ticket_destroyed: "Ticket was successfully destroyed."
+  dashboard_heading: "Incident Management Overview"
