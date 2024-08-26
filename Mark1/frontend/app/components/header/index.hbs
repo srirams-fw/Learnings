@@ -6,8 +6,8 @@
     <div id="header-options" class="header-options">
         <ul class="nav-bar poppins-regular">
             <li class="nav-links"><i class="fa fa-times right mobile-view" {{on "click" this.toggleMenu}}></i></li>
-            <li class="nav-links"><a href="/dashboard"><i class="fa fa-pie-chart"></i>{{t "dashboard"}}</a></li>
-            <li class="nav-links"><a href="/tickets"><i class="fa fa-ticket"></i>{{t "my_tickets"}}</a></li>
+            <li class="nav-links"><i class="fa fa-pie-chart"></i><a href="/dashboard">{{t "dashboard"}}</a></li>
+            <li class="nav-links"><i class="fa fa-ticket"></i><a href="/tickets">{{t "my_tickets"}}</a></li>
             <li class="nav-links create-option">
                 <a href="/tickets/new"> 
                     <button class="create-ticket" id="create" type="button">{{t "create_ticket"}}</button>
