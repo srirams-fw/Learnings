@@ -11,6 +11,7 @@ class TicketsController < ApplicationController
   # GET /tickets/1 or /tickets/1.json
   def show
     get_parent_info
+    get_comments
   end
 
   # GET /tickets/new
@@ -22,6 +23,7 @@ class TicketsController < ApplicationController
   # GET /tickets/1/edit
   def edit
     get_parent_info
+    get_comments
   end
 
   # POST /tickets or /tickets.json
@@ -81,6 +83,20 @@ class TicketsController < ApplicationController
     render json: { query:_query,result:_result  }, status: :ok
   end
 
+  def create_comment
+    _ticket = Ticket.find(params[:ticket_id])
+    _userID = User.find_by(email: session[:current_user_id])
+
+    @comment = _ticket.comments.build(comment_params)
+    @comment.user = _userID
+
+    if @comment.save
+      render json: { success: true, message: I18n.t('comment_added') }, status: :ok
+    else
+      render json: { success: false, message: @comment.errors }, status: :unprocessable_entity
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_ticket
@@ -90,6 +106,10 @@ class TicketsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def ticket_params
       params.require(:ticket).permit(:product, :ticket_type, :summary, :reporter, :status, :parent_ticket_id, :environment_found, :description, :priority, :severity, :start_date, :due_date, :assignee, :labels, :fix_version, :attachments, :comments)
+    end
+
+    def comment_params
+      params.require(:comment).permit(:comment_text, :user_id)
     end
 
     def get_user_tickets
@@ -130,6 +150,10 @@ class TicketsController < ApplicationController
       if @ticket.parent_ticket_id && @ticket.parent_ticket_id >0
         @parent_ticket = Ticket.find(@ticket.parent_ticket_id)
       end
+    end
+
+    def get_comments
+      @comments = @ticket.comments.order(created_at: :desc)
     end
 
     def bust_redis_cache

@@ -56,6 +56,7 @@ fr:
   ticket_created: "Le Billet a été créé avec succès."
   ticket_updated: "Le Billet a été mis à jour avec succès."
   ticket_destroyed: "Le Billet a été supprimé avec succès."
+  comment_added:: "Le Commentaire a été ajouté avec succès."
   dashboard_heading: "Vue d'ensemble de la gestion des Incidents"
   light: "Lumière"
   dark: "Sombre"

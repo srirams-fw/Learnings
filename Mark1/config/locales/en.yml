@@ -87,6 +87,7 @@ en:
   ticket_created: "Ticket was successfully created."
   ticket_updated: "Ticket was successfully updated."
   ticket_destroyed: "Ticket was successfully destroyed."
+  comment_added:: "Comment was successfully added."
   dashboard_heading: "Incident Management Overview"
   light: "Light"
   dark: "Dark"

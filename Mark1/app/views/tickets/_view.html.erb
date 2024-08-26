@@ -48,32 +48,34 @@
 
                 <div class="field comments-container">
                     <%= form.label str_concat(t(:comments)), class:'poppins-bold' %>
-                    <div class="comments-dummy-panel">
+                    <div id="comments_dummy_panel" class="comments-dummy-panel">
                         <i class="fa fa-file-text"></i> <button id="dummy_comments" type="button" class="dummy-comments"><%=t(:add_comment)%></button>
                     </div>
-                    <% if false %>
-                    <%= render 'rte', ticket: @ticket, form: form, form_attr: :comments, containerID: 'commentsEditor', style_class: 'hide', content: @ticket.comments do %>
+                    <%= render 'rte', form: form, form_attr: :comments_text, containerID: 'commentsEditor', style_class: 'hide' do %>
+                        <%= form.hidden_field :user_id, value: session[:current_user_id] %>
                         <%= form.button t(:ok), type: 'button', onclick: 'updateComments()', class: 'create-ticket' %>
                     <% end %>
-                    <% end %>
                     <div  id="view_comments" class="view-comments">
-                        <% if @ticket.comments.present? %>
+                        <% if @comments.present? %> 
                             <table>
-                                <tr>
-                                    <td rowspan="2" class="icon-panel">
-                                        <i class="fa fa-user"></i>
-                                    </td>
-                                    <td>
-                                        <label class="poppins-bold">
-                                            <%= @ticket.reporter %> 
-                                        </label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span data-area="content"><%= sanitize_content(@ticket.comments) %></span>
-                                    </td>
-                                </tr>
+                                <% @comments.each do |comment| %>
+                                    <tr>
+                                        <td rowspan="2" class="icon-panel">
+                                            <i class="fa fa-user"></i>
+                                        </td>
+                                        <td>
+                                            <label class="poppins-bold">
+                                                <%= truncate_email(comment.user.email) %>
+                                                <span class="poppins-regular font14"><%= comment.updated_at.strftime("%B %d, %Y %I:%M %p") %></span> 
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span data-area="content"><%= sanitize_content(comment.comment_text) %></span>
+                                        </td>
+                                    </tr>
+                                <% end %>
                             </table>
                         <% end %>
                     </div>
@@ -192,7 +194,7 @@
     var viewDescription = document.querySelector('#view_description');
     var descripitonEditor = document.querySelector('#descripitonEditor');
 
-    var dummyComments = document.querySelector('#view_comments');
+    var dummyComments = document.querySelector('#comments_dummy_panel');
     var commentsEditor = document.querySelector('#commentsEditor');
 
     var toggleView = (src,target,innerHTML = false) => {
@@ -232,9 +234,25 @@
         parentContainer.classList.toggle('hide')
     }
     var updateComments = () => {
-        updateDescription(dummyComments,commentsEditor)
+        dummyComments.classList.toggle('hide')
+        const parentContainer = document.querySelector?.(`#${commentsEditor.id}_panel`)
+        parentContainer.classList.toggle('hide')
+
+        const data = {
+            "comment": {
+                comment_text: ''+commentsEditor.innerHTML,
+              },
+              "ticket":{
+                id: <%= @ticket.id %> ,
+                ticket_id: <%= @ticket.id %>
+              },
+              ticket_id: <%= @ticket.id %>
+        }
+
+        apiCall('/create_comment','POST',null,data,reload)
+
     }   
     toggleView(header,summary)
     toggleView(viewDescription,descripitonEditor,true)
-    
+    toggleView(dummyComments,commentsEditor,true)
 </script>

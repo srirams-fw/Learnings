@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   get '/dashboard_data', to: 'tickets#get_dashboard_data'
   get '/get_session', to: 'application#get_session_info'
   get 'translations/:locale', to: 'translations#show'
+  post '/create_comment', to: 'tickets#create_comment'
 end
