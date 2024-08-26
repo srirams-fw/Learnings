@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_08_26_114301) do
+ActiveRecord::Schema.define(version: 2024_08_26_123937) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "ticket_id", null: false
@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(version: 2024_08_26_114301) do
     t.string "labels"
     t.string "fix_version"
     t.string "attachments"
-    t.text "comments"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

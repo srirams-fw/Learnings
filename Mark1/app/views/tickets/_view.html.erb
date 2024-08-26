@@ -51,8 +51,10 @@
                     <div class="comments-dummy-panel">
                         <i class="fa fa-file-text"></i> <button id="dummy_comments" type="button" class="dummy-comments"><%=t(:add_comment)%></button>
                     </div>
+                    <% if false %>
                     <%= render 'rte', ticket: @ticket, form: form, form_attr: :comments, containerID: 'commentsEditor', style_class: 'hide', content: @ticket.comments do %>
                         <%= form.button t(:ok), type: 'button', onclick: 'updateComments()', class: 'create-ticket' %>
+                    <% end %>
                     <% end %>
                     <div  id="view_comments" class="view-comments">
                         <% if @ticket.comments.present? %>

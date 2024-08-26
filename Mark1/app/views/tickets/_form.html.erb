@@ -96,10 +96,12 @@
     <%= form.text_field :attachments %>
   </div>
 
-  <div class="field">
+  <% if false %>
+  <div class="field hide">
     <%= form.label t(:comments) %>
     <%= render 'rte', ticket: @ticket, form: form, form_attr: :comments, containerID: 'commentsEditor' %>
   </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit t(:create_ticket), class: "create-ticket" %>
