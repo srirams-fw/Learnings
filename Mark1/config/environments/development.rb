@@ -27,6 +27,12 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  config.cache_store = :redis_cache_store, {
+        url: ENV['REDIS_URL'] || "redis://localhost:6379/0",
+        namespace: 'myapp_cache', # You can customize this namespace
+        expires_in: 1.hour # Set the expiration time for your cache
+      }
+
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :local
 

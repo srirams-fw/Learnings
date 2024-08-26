@@ -30,6 +30,7 @@ class TicketsController < ApplicationController
 
     respond_to do |format|
       if @ticket.save
+        bust_redis_cache
         format.html { redirect_to ticket_url(@ticket), notice: I18n.t('ticket_created') }
         format.json { render :show, status: :created, location: @ticket }
       else
@@ -43,6 +44,7 @@ class TicketsController < ApplicationController
   def update
     respond_to do |format|
       if @ticket.update(ticket_params)
+        bust_redis_cache
         format.html { redirect_to ticket_url(@ticket), notice: I18n.t('ticket_updated') }
         format.json { render :show, status: :ok, location: @ticket }
       else
@@ -55,7 +57,7 @@ class TicketsController < ApplicationController
   # DELETE /tickets/1 or /tickets/1.json
   def destroy
     @ticket.destroy
-
+    bust_redis_cache
     respond_to do |format|
       format.html { redirect_to tickets_url, notice: I18n.t('ticket_destroyed') }
       format.json { head :no_content }
@@ -74,7 +76,7 @@ class TicketsController < ApplicationController
   end
 
   def search_tickets
-    _query = params[:query]
+      _query = params[:query]
       _result = query_ticket_list(_query)
     render json: { query:_query,result:_result  }, status: :ok
   end
@@ -103,7 +105,15 @@ class TicketsController < ApplicationController
     end
 
     def query_ticket_list(_query='')
-      return Ticket.where("summary like '#{_query}%' OR id like '#{_query}%'").order(:id).pluck(:summary, :id)
+      _tickets = Rails.cache.fetch('query_ticket_list', expires_in: 30.minutes) do
+                  Rails.logger.info "Cache miss: Fetching tickets from the database for query: #{_query}"
+                  Ticket.where("summary like '#{_query}%' OR id like '#{_query}%'").order(:id).pluck(:summary, :id)
+                end
+
+                if Rails.cache.exist?('query_ticket_list')
+                  Rails.logger.info "Cache hit: Retrieved tickets from Redis for query: #{_query}"
+                end
+      return _tickets
     end
 
     def set_attribute_values
@@ -120,5 +130,9 @@ class TicketsController < ApplicationController
       if @ticket.parent_ticket_id && @ticket.parent_ticket_id >0
         @parent_ticket = Ticket.find(@ticket.parent_ticket_id)
       end
+    end
+
+    def bust_redis_cache
+        Rails.cache.delete('query_ticket_list')
     end
 end
