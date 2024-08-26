@@ -21,4 +21,10 @@ export default class HeaderIndexComponent extends Component {
     await this.translationLoader.loadTranslations(newLocale);
     this.intl.set('locale', newLocale);
   }
+
+  @action
+  toggleMenu(event){
+    const headerOptions = document.getElementById('header-options');
+    headerOptions.classList.toggle('show-header')
+  }
 }

@@ -1,41 +1,45 @@
 <div class="header">
+    <i class="fa fa-navicon hamburger-menu mobile-view font17" id="hamburger-menu" {{on "click" this.toggleMenu}}></i>
     <a href="/"> 
         <span class="header-logo"></span>
     </a> 
-
-    <ul class="nav-bar poppins-regular">
-        <li class="nav-links"><a href="/dashboard">{{t "dashboard"}}</a></li>
-        <li class="nav-links"><a href="/tickets">{{t "my_tickets"}}</a></li>
-        <li class="nav-links">
-            <a href="/tickets/new"> 
-                <button class="create-ticket" id="create" type="button">{{t "create_ticket"}}</button>
-            </a>
-        </li>
-    </ul>
-    <ul class="nav-bar poppins-regular align-end">
-        <li class="nav-links">
-            
-        </li>
-        <li class="nav-links">
-            <select name="lang" id="language-select" {{on "change" this.handleLanguageChange}} class="poppins-regular language-select">
-                <option value="en">{{t "en"}}</option>
-                <option value="fr">{{t "fr"}}</option>
-            </select>
-        </li>
-        <li class="nav-links user-container">
-            <div class="user-panel">
-                <label title="{{@email}}" class="pointer">
-                    <i class="fa fa-user"></i>
-                    {{t "welcome"}} {{@userName}}
-                </label>
-                <div class="user-dropdown">
-                    <div class="user-logout">
-                        <a href="#" {{on "click" this.handleClick}} class="pointer">
-                            <i class="fa fa-sign-out"></i> <label>Logout</label>
-                        </a>
+    <div id="header-options" class="header-options">
+        <ul class="nav-bar poppins-regular">
+            <li class="nav-links"><i class="fa fa-times right mobile-view" {{on "click" this.toggleMenu}}></i></li>
+            <li class="nav-links"><a href="/dashboard"><i class="fa fa-pie-chart"></i>{{t "dashboard"}}</a></li>
+            <li class="nav-links"><a href="/tickets"><i class="fa fa-ticket"></i>{{t "my_tickets"}}</a></li>
+            <li class="nav-links create-option">
+                <a href="/tickets/new"> 
+                    <button class="create-ticket" id="create" type="button">{{t "create_ticket"}}</button>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav-bar poppins-regular align-end">
+            <li class="nav-links">
+                
+            </li>
+            <li class="nav-links">
+                <i class="fa fa-language"></i>
+                <select name="lang" id="language-select" {{on "change" this.handleLanguageChange}} class="poppins-regular language-select">
+                    <option value="en">{{t "en"}}</option>
+                    <option value="fr">{{t "fr"}}</option>
+                </select>
+            </li>
+            <li class="nav-links user-container">
+                <div class="user-panel">
+                    <label title="{{@email}}" class="pointer">
+                        <i class="fa fa-user"></i>
+                        {{t "welcome"}} {{@userName}}
+                    </label>
+                    <div class="user-dropdown">
+                        <div class="user-logout">
+                            <a href="#" {{on "click" this.handleClick}} class="pointer">
+                                <i class="fa fa-sign-out"></i> <label>Logout</label>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </li>
-    </ul>
+            </li>
+        </ul>
+    </div>
 </div>

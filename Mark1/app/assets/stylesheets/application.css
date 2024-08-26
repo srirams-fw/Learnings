@@ -90,7 +90,11 @@ body.dark-mode {
 }
 
 .font17 {
-  font-size: 17px;
+  font-size: 17px !important;
+}
+
+.right{
+  float: right;
 }
 
 .root-container {
@@ -118,6 +122,16 @@ body.dark-mode {
   background-color: #f9f3e5; /*beige for dark #f9f3e5; soft blue #e3f2fd*/
 }
 
+.header-options {
+  background-color: inherit;
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .header-logo {
   display: inline-block;
   background: url("https://dam.freshworks.com/m/1d230ee78c07681a/original/headerLogoLight.webp") no-repeat center;
@@ -131,11 +145,14 @@ body.dark-mode {
 ul.nav-bar {
   list-style-type: none;
   margin-left: 10px;
+  display: flex;
+  align-items: center;
 }
 
 ul.nav-bar li {
   display: inline-block;
   margin: 0 10px;
+  height: 100%;
 }
 
 .nav-links a {
@@ -144,11 +161,11 @@ ul.nav-bar li {
   color:inherit;
 }
 
-.nav-links.active a {
+.nav-links.active {
   color:#30b6f8;
 }
 
-.nav-links a:hover {
+.nav-links:hover {
   color:#30b6f8;
 }
 
@@ -261,4 +278,53 @@ ul.nav-bar li .search-item {
   .mobile-view{
       display: unset !important;
   }
+  .header{
+    justify-content: unset;
+  }
+  .header .header-options{
+    flex-direction: column;
+    align-items:flex-start;
+    justify-content: unset;
+    position: absolute;
+    margin: 0px 1px;
+    padding: 0px 10px;
+    top:78px;
+    left:0;
+    bottom: 0;
+    right: 0;
+    width: 99vw;
+    height: 0;
+    z-index: 100;
+    overflow: hidden;
+  }
+
+  .header .header-options.show-header {
+    height: 88vh;
+  }
+
+  .header ul.nav-bar {
+    margin: 0;
+    flex-direction: column;
+    width: 100%;
+  }
+
+
+  .align-end {
+    margin-left: 0 !important;
+  }
+
+   ul.nav-bar li {
+    display: block;
+    width: 100%;
+    margin: 5px 10px;
+  }
+
+  .create-option {
+    display: none !important;
+  }
+
+  ul.nav-bar li .search-item {
+    width: 90%;
+  }
+
 }
