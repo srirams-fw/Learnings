@@ -86,7 +86,7 @@ body.dark-mode {
 }
 
 .font40 {
-  font-size: 40px;
+  font-size: 40px !important;
 }
 
 .font17 {
@@ -309,7 +309,7 @@ ul.nav-bar li .search-item {
   }
 
 
-  .align-end {
+  .header-options .align-end {
     margin-left: 0 !important;
   }
 

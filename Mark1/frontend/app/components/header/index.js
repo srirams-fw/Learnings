@@ -27,4 +27,10 @@ export default class HeaderIndexComponent extends Component {
     const headerOptions = document.getElementById('header-options');
     headerOptions.classList.toggle('show-header')
   }
+
+  @action
+  creatTicket(event){
+    const createTicketLink = document.getElementById('create_ticket_link')
+    createTicketLink?.click()
+  }
 }

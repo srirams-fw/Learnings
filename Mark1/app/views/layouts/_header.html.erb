@@ -3,13 +3,14 @@
     <%= link_to root_path do%>
         <span class="header-logo"></span>
     <%end%>
+    <span class="nav-links align-end"><i class="fa fa-plus-square create-icon" onClick="creatTicket()"></i></span>
     <div id="header-options" class="header-options">
         <ul class="nav-bar poppins-regular">
             <li class="nav-links"><i class="fa fa-times right mobile-view" onClick="toggleMenu()"></i></li>
             <li class="nav-links"><i class="fa fa-pie-chart"></i><%= link_to t(:dashboard), dashboard_path %></li>
             <li class="nav-links"><i class="fa fa-ticket"></i><%= link_to t(:my_tickets), tickets_path %></li>
             <li class="nav-links create-option">
-                <%= link_to new_ticket_path do%>
+                <%= link_to new_ticket_path, id:"create_ticket_link" do%>
                     <button class="create-ticket" type="button" id="create"><%= t(:create_ticket) %></button>
                 <%end%>
             </li>
@@ -52,5 +53,9 @@
     function toggleMenu() {
         const headerOptions = document.getElementById('header-options');
         headerOptions.classList.toggle('show-header')
+    }
+    function creatTicket(){
+       const createTicketLink = document.getElementById('create_ticket_link')
+       createTicketLink?.click()
     }
 </script>

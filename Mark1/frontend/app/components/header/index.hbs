@@ -3,13 +3,14 @@
     <a href="/"> 
         <span class="header-logo"></span>
     </a> 
+    <span class="nav-links align-end"><i class="fa fa-plus-square create-icon" {{on "click" this.creatTicket}}></i></span>
     <div id="header-options" class="header-options">
         <ul class="nav-bar poppins-regular">
             <li class="nav-links"><i class="fa fa-times right mobile-view" {{on "click" this.toggleMenu}}></i></li>
             <li class="nav-links"><i class="fa fa-pie-chart"></i><a href="/dashboard">{{t "dashboard"}}</a></li>
             <li class="nav-links"><i class="fa fa-ticket"></i><a href="/tickets">{{t "my_tickets"}}</a></li>
             <li class="nav-links create-option">
-                <a href="/tickets/new"> 
+                <a id="create_ticket_link" href="/tickets/new"> 
                     <button class="create-ticket" id="create" type="button">{{t "create_ticket"}}</button>
                 </a>
             </li>
