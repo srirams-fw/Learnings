@@ -16,12 +16,12 @@
             <button data-command="unlink"><i class="fa fa-unlink"></i></button>
             <button data-command="foreColor" data-prompt="Enter the hex color code"><i class="fa fa-paint-brush"></i></button>
             <button data-command="hiliteColor" data-prompt="Enter the hex color code"><i class="fa fa-adjust"></i></button>
-            <button data-command="insertImage" data-prompt="Enter the image URL"><i class="fa fa-image"></i></button>
+            <button class="hide" data-command="insertImage" data-prompt="Enter the image URL"><i class="fa fa-image"></i></button>
             <button data-command="undo"><i class="fa fa-undo"></i></button>
             <button data-command="redo"><i class="fa fa-repeat"></i></button>
         </div>
 
-        <div id="<%=containerID%>" class="editor" contenteditable="true">
+        <div id="<%=containerID%>" class="editor font17" contenteditable="true">
             <%= sanitize_content(content) %>
         </div>
         <%= form.hidden_field form_attr, value: content %>
