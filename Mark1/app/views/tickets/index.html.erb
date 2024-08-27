@@ -6,6 +6,7 @@
     <table class="myTicket-table">
       <thead>
         <tr>
+          <th>#<%=t(:id)%></th>
           <th><%=t(:product)%></th>
           <th><%=t(:ticket_type)%></th>
           <th><%=t(:summary)%></th>
@@ -25,6 +26,7 @@
       <tbody>
         <% @tickets.each do |ticket| %>
           <tr>
+            <td><%= ticket.id %></td>
             <td><%= ticket.product %></td>
             <td><%= ticket.ticket_type %></td>
             <td><%= truncate_text(ticket.summary,60) %></td>
