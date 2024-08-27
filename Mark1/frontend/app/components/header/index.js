@@ -37,5 +37,6 @@ export default class HeaderIndexComponent extends Component {
   @action
   colorThemeToggle(event){
     document.body.classList.toggle('dark-mode')
+    apiCall('/set_theme','POST',null,{ theme: document.body.classList.contains('dark-mode') ? 'dark' : 'light'  })
   }
 }
