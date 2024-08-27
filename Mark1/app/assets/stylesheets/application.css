@@ -16,23 +16,40 @@
 
  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    transition: all 0.3s;
- }
+ :root {
+  --primary-color: #30b6f8;
+  --secondary-color: #2C2C2C;
+  --dark-bg-color: #f9f3e5;
+  --light-bg-color: #e3f2fd;
+  --font-color-light: #fff;
+  --font-color-dark: #000;
+  --font-weight-regular: 300;
+  --font-weight-bold: 500;
+  --font-weight-black: 700;
+  --font-size-large: 40px;
+  --font-size-medium: 17px;
+  --font-size-small: 14px;
+  --header-height: 78px;
+  --border-color: #ccc;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: all 0.3s;
+}
 
 body {
   background-color: white;
   color: black;
 }
 
-/* Dark theme */
 body.dark-mode {
-  background-color: #2C2C2C;
-  color: white;
+  background-color: var(--secondary-color);
+  color: var(--font-color-light);
 }
+
 .bold {
   font-weight: bold;
 }
@@ -41,63 +58,72 @@ body.dark-mode {
   display: none !important;
 }
 
-.pointer, .pointer *{
+.pointer, .pointer * {
   cursor: pointer;
 }
 
-.mandatory::after{
+.mandatory::after {
   content: " *";
   color: red;
 }
-.poppins-regular,.poppins-bold,.poppins-black,.poppins-regular-italic,.poppins-bold-italic,.poppins-black-italic {
-  font-family: "Poppins", sans-serif;
+
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
 }
 
-.poppins-regular,.poppins-bold,.poppins-black {
-  font-style: normal;
+.font-weight-regular {
+  font-weight: var(--font-weight-regular);
 }
-  
-.poppins-regular-italic,.poppins-bold-italic,.poppins-black-italic {
+
+.font-weight-bold {
+  font-weight: var(--font-weight-bold) !important;
+}
+
+.font-weight-black {
+  font-weight: var(--font-weight-black) !important;
+}
+
+.font-style-italic {
   font-style: italic;
 }
 
 .poppins-regular {
-  font-weight: 300;
+  @extend .font-poppins, .font-weight-regular;
 }
 
 .poppins-bold {
-  font-weight: 500 !important;
+  @extend .font-poppins, .font-weight-bold;
 }
 
 .poppins-black {
-  font-weight: 700 !important;
+  @extend .font-poppins, .font-weight-black;
 }
 
 .poppins-regular-italic {
-  font-weight: 300;
+  @extend .poppins-regular, .font-style-italic;
 }
 
 .poppins-bold-italic {
-  font-weight: 500;
+  @extend .poppins-bold, .font-style-italic;
 }
 
 .poppins-black-italic {
-  font-weight: 700;
+  @extend .poppins-black, .font-style-italic;
 }
 
 .font40 {
-  font-size: 40px !important;
+  font-size: var(--font-size-large) !important;
 }
 
 .font14 {
-  font-size: 14px !important;
+  font-size: var(--font-size-small) !important;
 }
 
 .font17 {
-  font-size: 17px !important;
+  font-size: var(--font-size-medium) !important;
 }
 
-.right{
+.right {
   float: right;
 }
 
@@ -108,23 +134,23 @@ body.dark-mode {
 }
 
 .header {
-  padding:15px;
+  padding: 15px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   position: fixed;
-  top:0;
+  top: 0;
   width: 100%;
-  background-color: #e3f2fd; /*beige for dark #f9f3e5; soft blue #e3f2fd*/
-  color: #000 ;
-  height: 78px;
+  background-color: var(--light-bg-color);
+  color: var(--font-color-dark);
+  height: var(--header-height);
   z-index: 40;
 }
 
-.dark-mode .header{
-  background-color: #f9f3e5; /*beige for dark #f9f3e5; soft blue #e3f2fd*/
+.dark-mode .header {
+  background-color: var(--dark-bg-color);
 }
 
 .header-options {
@@ -163,20 +189,17 @@ ul.nav-bar li {
 .nav-links a {
   padding: 0 5px;
   text-decoration: none;
-  color:inherit;
+  color: inherit;
 }
 
-.nav-links.active {
-  color:#30b6f8;
-}
-
+.nav-links.active,
 .nav-links:hover {
-  color:#30b6f8;
+  color: var(--primary-color);
 }
 
 .create-ticket {
-  background-color: #30b6f8;
-  color: #fff;
+  background-color: var(--primary-color);
+  color: var(--font-color-light);
   padding: 12px;
   border: none;
   border-radius: 5px;
@@ -190,17 +213,15 @@ ul.nav-bar li {
 .search-ticket {
   padding: 10px;
   border: 0px;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 2px solid var(--border-color);
   background-color: inherit;
   width: 15vw;
   min-width: 200px;
 }
 
 .search-ticket::placeholder {
-  font-family: "Poppins", sans-serif;
+  @extend .font-poppins, .font-weight-regular;
   color: inherit;
-  font-style: normal;
-  font-weight: 300;
 }
 
 .language-select {
@@ -212,7 +233,7 @@ ul.nav-bar li {
 .nav-links select, .nav-links select * {
   border: none;
   cursor: pointer;
-  font-family: "Poppins", sans-serif;
+  @extend .font-poppins;
 }
 
 .align-end {
@@ -228,7 +249,7 @@ ul.nav-bar li {
 }
 
 .user-container img, .user-container .pointer {
-  vertical-align: middle; 
+  vertical-align: middle;
 }
 
 .user-panel {
@@ -246,29 +267,30 @@ ul.nav-bar li {
 }
 
 .user-panel:hover .user-dropdown {
-  height: auto; 
+  height: auto;
 }
 
-.user-logout{
+.user-logout {
   padding: 10px;
-  background-color: #fff;
+  background-color: var(--font-color-light);
   color: inherit;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
 }
-.user-logout .fa{
+
+.user-logout .fa {
   margin: 0 5px;
 }
 
 .footer {
   padding: 15px;
-  background-color: #36454f; /*#282C35*/  
-  color: #fff;
+  background-color: #36454f;
+  color: var(--font-color-light);
 }
 
 ul.nav-bar li .search-item {
   display: flex;
   align-items: baseline;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 2px solid var(--border-color);
 }
 
 .search-item i {
