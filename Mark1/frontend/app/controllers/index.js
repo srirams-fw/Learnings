@@ -28,13 +28,20 @@ export default class IndexController extends Controller {
   }
 
   processTicketData({ result = [] }) {
-    const { data0, data1 } = transformDashboardData(result);
+    const { data0, data1, data2 } = transformDashboardData(result);
     this.chartData = data0;
 
     if (this.chartData1 && this.chartData1[0]) {
       const data = this.chartData1[0].data;
       data.forEach((datum) => {
         datum.y = parseFloat(data1[datum.name]);
+      });
+    }
+
+    if (this.chartData2 && this.chartData2[0]) {
+      const data = this.chartData2[0].data;
+      data.forEach((datum) => {
+        datum.y = parseFloat(data2[datum.name]);
       });
     }
   }

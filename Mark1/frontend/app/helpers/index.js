@@ -23,10 +23,16 @@ export const transformDashboardData = (result) => {
     '> 100 hrs': 0,
   };
 
+  const products = {
+    'ER': 0,
+    'ESM': 0,
+    'MSP': 0,
+  };
+
   if (result?.length > 0) {
     result.forEach((ticket) => {
       //for Chart0 open tickets
-      const { product, priority } = ticket;
+      const { product, priority,start_date,due_date } = ticket;
       if (!temp[product]) {
         temp[product] = [0, 0, 0];
       }
@@ -43,8 +49,8 @@ export const transformDashboardData = (result) => {
 
       //For chart1 TAT
       const timeDifference = calculateTimeDifferenceInHours(
-        ticket.start_date,
-        ticket.due_date
+        start_date,
+        due_date
       );
 
       if (timeDifference < 25) {
@@ -58,6 +64,10 @@ export const transformDashboardData = (result) => {
       } else {
         categories['> 100 hrs']++;
       }
+
+      //For chart2 
+      products[product]++
+
     });
 
     const data = Object.entries(temp).map(([key, value]) => {
@@ -75,7 +85,14 @@ export const transformDashboardData = (result) => {
       ).toFixed(2);
     }
 
-    return { data0: data, data1: categories };
+    for (let product in products) {
+      products[product] = (
+        (products[product] / totalTickets) *
+        100
+      ).toFixed(2);
+    }
+
+    return { data0: data, data1: categories, data2: products };
   }
 };
 

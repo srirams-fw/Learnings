@@ -49,7 +49,25 @@ export const CHART_DATA1 = [
 
 export const CHART_DATA2 = [
   {
-    data: [{ name: '', y: 1 }],
+    name: 'Incidents by Product',
+    colorByPoint: true,
+    data: [
+      {
+        name: 'ER',
+        y: 56.33,
+        drilldown: 'ER',
+      },
+      {
+        name: 'ESM',
+        y: 24.03,
+        drilldown: 'ESM',
+      },
+      {
+        name: 'MSP',
+        y: 10.38,
+        drilldown: 'MSP',
+      },
+    ],
   },
 ];
 
@@ -78,14 +96,14 @@ export const CHART_OPTIONS1 = {
     text: 'Incident Turn Around Time',
   },
   subtitle: {
-    text: `Click the columns to view details`,
+    text: ``,
   },
   xAxis: {
     type: 'category',
   },
   yAxis: {
     title: {
-      text: 'Total percent of Incidents reported',
+      text: '% of Incidents Closed',
     },
   },
   legend: {
@@ -138,34 +156,59 @@ export const CHART_OPTIONS1 = {
 };
 
 export const CHART_OPTIONS2 = {
-  title: {
-    text: 'Incident Volume across Products',
+  chart: {
+    type: 'pie',
   },
-  pie: {
-    borderColor: 'black',
-    innerSize: '65%',
-    size: '70%',
-    animation: false,
-    dataLabels: {
-      enabled: true,
-      useHTML: true,
-      distance: 20,
-      format: '{point.name}<br>({point.y})',
-      style: {
-        fontSize: 12,
-        color: 'blue',
-        fontWeight: 'normal',
+  title: {
+    text: 'Incidents by Product',
+  },
+  subtitle: {
+    text: ``,
+  },
+  xAxis: {
+    type: 'category',
+  },
+  yAxis: {
+    title: {
+      text: '% of Incidents Reported',
+    },
+  },
+  legend: {
+    enabled: false,
+  },
+  plotOptions: {
+    pie: {
+      allowPointSelect: true,
+      cursor: 'pointer',
+      dataLabels: {
+        enabled: true,
+        format: '{point.name}: {point.y:.1f}%',
       },
     },
-    states: {
-      hover: {
-        halo: {
-          size: 0,
-        },
+  },
+  tooltip: {
+    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+    pointFormat: `<span style="color:{point.color}">{point.name}</span>: '
+        '<b>{point.y:.2f}%</b> of total<br/>`,
+  },
+  drilldown: {
+    activeDataLabelStyle: {},
+    series: [
+      {
+        name: 'ER',
+        id: 'ER',
+        data: [],
       },
-      inactive: {
-        opacity: 1,
+      {
+        name: 'ESP',
+        id: 'ESP',
+        data: [],
       },
-    },
+      {
+        name: 'ESM',
+        id: 'ESM',
+        data: [],
+      },
+    ],
   },
 };
