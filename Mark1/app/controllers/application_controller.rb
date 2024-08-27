@@ -32,8 +32,17 @@ class ApplicationController < ActionController::Base
         #reset_session
     end
 
+    def set_color_theme
+        session[:color_theme] = params[:theme]
+        render json: { success: true, message: "Theme Changed" }, status: :ok
+    end
+
     def get_session_info
-        render json: { userName: truncate_email(session[:current_user_id]), email: session[:current_user_id], locale: session[:locale] || I18n.default_locale  }, status: :ok
+        render json: { 
+            userName: truncate_email(session[:current_user_id]), 
+            email: session[:current_user_id], 
+            locale: session[:locale] || I18n.default_locale,
+            theme: session[:color_theme] || 'light'  }, status: :ok
     end
 
     def logout

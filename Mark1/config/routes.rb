@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/resend_mail', to: 'login#resend_mail'
   get '/authorize/:key', to: 'login#authorize'
   post '/set_language', to: 'application#set_lang'
+  post '/set_theme', to: 'application#set_color_theme'
   delete '/logout', to: 'application#logout'
   post '/fetch_tickets', to: 'tickets#fetch_tickets'
   post '/search_tickets', to: 'tickets#search_tickets'
