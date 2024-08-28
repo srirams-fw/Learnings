@@ -90,15 +90,18 @@
   }
   
   .poppins-regular {
-    @extend .font-poppins, .font-weight-regular;
+    font-family: 'Poppins', sans-serif;
+    font-weight: var(--font-weight-regular);
   }
   
   .poppins-bold {
-    @extend .font-poppins, .font-weight-bold;
+    font-family: 'Poppins', sans-serif;
+    font-weight: var(--font-weight-bold);
   }
   
   .poppins-black {
-    @extend .font-poppins, .font-weight-black;
+    font-family: 'Poppins', sans-serif;
+    font-weight: var(--font-weight-black);
   }
   
   .poppins-regular-italic {

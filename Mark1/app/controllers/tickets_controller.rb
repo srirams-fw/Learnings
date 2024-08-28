@@ -114,7 +114,15 @@ class TicketsController < ApplicationController
 
     def get_user_tickets
       _email = session[:current_user_id]
-      return Ticket.where('reporter = ? OR assignee = ?', _email, _email)
+      _tickets =  Rails.cache.fetch('ticket_list', expires_in: 30.minutes) do
+                    Rails.logger.info "Cache miss: Fetching tickets from the database"
+                    Ticket.where('reporter = ? OR assignee = ?', _email, _email)
+                  end
+
+      if Rails.cache.exist?('ticket_list')
+        Rails.logger.info "Cache hit: Retrieved tickets from Redis"
+      end
+      return _tickets
     end
     def get_assignee_list
       return User.pluck(:email)
@@ -125,15 +133,7 @@ class TicketsController < ApplicationController
     end
 
     def query_ticket_list(_query='')
-      _tickets = Rails.cache.fetch('query_ticket_list', expires_in: 30.minutes) do
-                  Rails.logger.info "Cache miss: Fetching tickets from the database for query: #{_query}"
-                  Ticket.where("summary like '#{_query}%' OR id like '#{_query}%'").order(:id).pluck(:summary, :id)
-                end
-
-                if Rails.cache.exist?('query_ticket_list')
-                  Rails.logger.info "Cache hit: Retrieved tickets from Redis for query: #{_query}"
-                end
-      return _tickets
+      return Ticket.where("summary like '#{_query}%' OR id like '#{_query}%'").order(:id).pluck(:summary, :id)
     end
 
     def set_attribute_values
@@ -157,6 +157,6 @@ class TicketsController < ApplicationController
     end
 
     def bust_redis_cache
-        Rails.cache.delete('query_ticket_list')
+        Rails.cache.delete('ticket_list')
     end
 end
