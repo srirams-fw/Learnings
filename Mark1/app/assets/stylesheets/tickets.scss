@@ -81,6 +81,35 @@
     textarea {
         height: 100px;
     }
+
+    
+}
+
+.dark-mode {
+    .ticket-form,.main-container,.right-panel {
+        select, input[type=text], input[type=number], input[type=date] , textarea, .editor, .toolbar, .toolbar * {
+            background-color: inherit;
+            color: inherit;
+            
+        }
+        .autocomplete-result, .autocomplete-result * {
+            color: inherit;
+            background-color: #444;
+        }
+        
+    }
+    .autocomplete-result, .autocomplete-result * {
+        color: #fff;
+        background-color: #444;
+    }
+
+    .toolbar {
+        button {
+            &:hover {
+                background-color: #444;
+            }
+        }
+    }
 }
 
 .ticket-form {
