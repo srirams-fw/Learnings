@@ -223,7 +223,8 @@ ul.nav-bar li {
 }
 
 .search-ticket::placeholder {
-  @extend .font-poppins, .font-weight-regular;
+  font-family: 'Poppins', sans-serif;
+  font-weight: var(--font-weight-regular);
   color: inherit;
 }
 
@@ -236,7 +237,7 @@ ul.nav-bar li {
 .nav-links select, .nav-links select * {
   border: none;
   cursor: pointer;
-  @extend .font-poppins;
+  font-family: 'Poppins', sans-serif;
 }
 
 .align-end {
